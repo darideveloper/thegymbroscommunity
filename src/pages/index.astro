@@ -1,11 +1,26 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout>
-	<Welcome />
+  <h1 class='text-4xl font-bold underline'>Hello world!</h1>
+
+  <div class='card bg-base-100 w-96 shadow-sm'>
+    <figure>
+      <img
+        src='https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
+        alt='Shoes'
+      />
+    </figure>
+    <div class='card-body'>
+      <h2 class='card-title'>Card Title</h2>
+      <p>
+        A card component has a figure, a body part, and inside body there are
+        title and actions parts
+      </p>
+      <div class='card-actions justify-end'>
+        <button class='btn btn-primary'>Buy Now</button>
+      </div>
+    </div>
+  </div>
 </Layout>
