@@ -1,26 +1,82 @@
 ---
+// React bits
 import Layout from '../layouts/Layout.astro'
+import LaserFlow from '../components/LaserFlow.jsx'
+import ScrollVelocity from '../components/ScrollVelocity.jsx'
+import BlurText from '../components/BlurText.jsx'
+import MagicBento from '../components/MagicBento.jsx'
+import CircularGallery from '../components/CircularGallery.jsx'
 ---
 
 <Layout>
-  <h1 class='text-4xl font-bold underline'>Hello world!</h1>
+  <div class='flex justify-center w-full py-12'>
+    <BlurText
+      text='The Gym Bros Community'
+      delay={200}
+      animateBy='words'
+      direction='top'
+      className='text-6xl font-bold text-primary text-center'
+      client:only='react'
+    />
+  </div>
 
-  <div class='card bg-base-100 w-96 shadow-sm'>
-    <figure>
-      <img
-        src='https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
-        alt='Shoes'
-      />
-    </figure>
-    <div class='card-body'>
-      <h2 class='card-title'>Card Title</h2>
-      <p>
-        A card component has a figure, a body part, and inside body there are
-        title and actions parts
-      </p>
-      <div class='card-actions justify-end'>
-        <button class='btn btn-primary'>Buy Now</button>
-      </div>
-    </div>
+  <div style={{ width: '100vw', height: '80vh', position: 'relative' }}>
+    <LaserFlow
+      color='#ca3500'
+      wispDensity={1.8}
+      flowSpeed={0.84}
+      verticalSizing={5}
+      horizontalSizing={1.6}
+      fogIntensity={0.55}
+      fogScale={0.6}
+      wispSpeed={15}
+      wispIntensity={5}
+      flowStrength={0.13}
+      decay={1.1}
+      horizontalBeamOffset={0.15}
+      verticalBeamOffset={-0.5}
+      transparent={true}
+      client:only='react'
+    />
+  </div>
+
+  <div class='text-primary mt-20'>
+    <ScrollVelocity
+      texts={['Próximamente', 'Coming Soon']}
+      velocity={80}
+      className='custom-scroll-text'
+      client:only='react'
+    />
+  </div>
+
+  <div style={{ height: '600px', position: 'relative' }}>
+    <CircularGallery
+      bend={3}
+      textColor='#ffffff'
+      borderRadius={0.05}
+      scrollEase={0.02}
+      bend={1}
+      borderRadius={0.05}
+      scrollSpeed={2}
+      scrollEase={0.05}
+      client:only='react'
+    />
+  </div>
+
+  <div class='mt-20 w-full flex justify-center'>
+    <MagicBento
+      textAutoHide={true}
+      enableStars
+      enableSpotlight
+      enableBorderGlow={true}
+      enableTilt={false}
+      enableMagnetism={false}
+      clickEffect
+      spotlightRadius={400}
+      particleCount={12}
+      glowColor='202, 53, 0'
+      disableAnimations={false}
+      client:only='react'
+    />
   </div>
 </Layout>
