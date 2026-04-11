@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import StaggeredMenu from '../components/StaggeredMenu'
+import GlowSidemenuWrapper from '../components/GlowSidemenu/GlowSidemenuWrapper'
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -43,30 +43,17 @@ const socialItems = [
     <title>Astro Basics</title>
   </head>
   <body class='bg-[#060010]'>
-    <div style={{ position: 'fixed', top: '1rem', left: '1rem', zIndex: 100 }}>
+    <div style={{ position: 'fixed', top: '1.5rem', left: '1.5rem', zIndex: 100 }}>
       <a href='/'>
         <img src='/assets/logo.webp' alt='TGC Logo' class='w-24 h-24' />
       </a>
     </div>
-    <div style={{ position: 'fixed', top: 0, right: 0, zIndex: 50 }}>
-      <StaggeredMenu
-        position='right'
-        items={menuItems}
-        socialItems={socialItems}
-        displaySocials
-        displayItemNumbering={true}
-        menuButtonColor='#ffffff'
-        openMenuButtonColor='#fff'
-        changeMenuColorOnOpen={true}
-        colors={['#ff5a00', '#ca3500']}
-        logoUrl='/path-to-your-logo.svg'
-        accentColor='#ca3500'
-        isFixed={true}
-        onMenuOpen={() => console.log('Menu opened')}
-        onMenuClose={() => console.log('Menu closed')}
-        client:only='react'
-      />
-    </div>
+    
+    <GlowSidemenuWrapper 
+      items={menuItems} 
+      socialItems={socialItems} 
+      client:load
+    />
 
     <slot />
   </body>
