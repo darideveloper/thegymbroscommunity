@@ -28,13 +28,12 @@ The menu SHALL close when the user interacts with the close button or clicks any
 Clicking on the dark background overlay triggers the closing animation, which executes smoothly without causing browser layout thrashing.
 
 ### Requirement: Responsive Toggle Button
-A menu toggle button MUST be available and functional on both mobile (viewport < 768px) and desktop resolutions.
+A menu toggle button MUST be integrated into the `Header.astro` component on the right-most section of the header. The component MUST be refactored to support flexible, position-agnostic placement while remaining functional on both mobile and desktop resolutions.
 
-#### Scenario: Desktop Toggle
-The menu button is visible in the desktop header and opens the side menu upon interaction.
-
-#### Scenario: Mobile Toggle
-The menu button remains accessible and functional on small screens.
+#### Scenario: Header Toggle Presence
+- **GIVEN** the user navigates to any page
+- **WHEN** the header is rendered
+- **THEN** the menu toggle MUST be visible and functional in the right-most section of the header.
 
 ### Requirement: Integrated New Logo
 The `GlowSidemenu` MUST use the new logo from `src/assets/logo.webp` in its header, replacing the old logo reference.
