@@ -1,0 +1,35 @@
+---
+import LaserFlow from '../molecules/react-bits/LaserFlow.jsx'
+import Countdown from '../molecules/Countdown.jsx'
+---
+
+<section class='relative w-full overflow-hidden'>
+  <div class='flex flex-col items-center w-full py-12 gap-8'>
+    <slot />
+    
+    <Countdown
+      targetDate='2027-12-31T00:00:00'
+      className='mt-4'
+      client:only='react'
+    />
+  </div>
+
+  <div style={{ width: '100vw', height: '80vh', position: 'relative' }}>
+    <LaserFlow
+      color='#ca3500'
+      flowSpeed={0.84}
+      verticalSizing={5}
+      horizontalSizing={1.6}
+      fogIntensity={0.55}
+      fogScale={0.6}
+      wispSpeed={15}
+      wispIntensity={5}
+      flowStrength={0.13}
+      decay={1.1}
+      horizontalBeamOffset={0.15}
+      verticalBeamOffset={-0.5}
+      transparent={true}
+      client:only='react'
+    />
+  </div>
+</section>

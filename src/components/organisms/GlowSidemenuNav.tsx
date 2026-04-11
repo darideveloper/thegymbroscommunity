@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import GlowSidemenu from './GlowSidemenu';
-import GlowSidemenuToggle from './GlowSidemenuToggle';
+import GlowSidemenuToggle from '../molecules/GlowSidemenuToggle';
 
 interface MenuItem {
   label: string;
@@ -13,12 +13,12 @@ interface SocialItem {
   link: string;
 }
 
-interface GlowSidemenuWrapperProps {
+interface GlowSidemenuNavProps {
   items: MenuItem[];
   socialItems?: SocialItem[];
 }
 
-export const GlowSidemenuWrapper: React.FC<GlowSidemenuWrapperProps> = ({
+export const GlowSidemenuNav: React.FC<GlowSidemenuNavProps> = ({
   items,
   socialItems
 }) => {
@@ -39,4 +39,4 @@ export const GlowSidemenuWrapper: React.FC<GlowSidemenuWrapperProps> = ({
   );
 };
 
-export default GlowSidemenuWrapper;
+export default GlowSidemenuNav;

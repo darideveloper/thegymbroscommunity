@@ -1,6 +1,6 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
 import { useEffect, useRef, useState } from 'react';
-import { isWebGLAvailable } from '../lib/webgl';
+import { isWebGLAvailable } from '../../../lib/webgl';
 
 import './CircularGallery.css';
 

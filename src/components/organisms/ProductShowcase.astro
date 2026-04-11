@@ -1,0 +1,33 @@
+---
+import ScrollVelocity from '../molecules/react-bits/ScrollVelocity.jsx'
+import CircularGallery from '../molecules/react-bits/CircularGallery.jsx'
+
+interface Props {
+  products: any[];
+}
+
+const { products } = Astro.props;
+---
+
+<section class='mt-20'>
+  <div class='text-primary mb-10'>
+    <ScrollVelocity
+      texts={['Próximamente', 'Coming Soon']}
+      velocity={80}
+      className='custom-scroll-text py-2'
+      client:only='react'
+    />
+  </div>
+
+  <div style={{ height: '600px', position: 'relative' }}>
+    <CircularGallery
+      items={products}
+      bend={1}
+      textColor='#ffffff'
+      borderRadius={0.05}
+      scrollSpeed={2}
+      scrollEase={0.05}
+      client:only='react'
+    />
+  </div>
+</section>

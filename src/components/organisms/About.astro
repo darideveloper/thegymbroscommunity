@@ -1,0 +1,20 @@
+---
+import MagicBento from './react-bits/MagicBento.jsx'
+---
+
+<section class='mt-20 w-full flex justify-center pb-20'>
+  <MagicBento
+    textAutoHide={true}
+    enableStars
+    enableSpotlight
+    enableBorderGlow={true}
+    enableTilt={false}
+    enableMagnetism={false}
+    clickEffect
+    spotlightRadius={400}
+    particleCount={12}
+    glowColor='202, 53, 0'
+    disableAnimations={false}
+    client:only='react'
+  />
+</section>

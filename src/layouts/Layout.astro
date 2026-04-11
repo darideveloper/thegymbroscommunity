@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import GlowSidemenuWrapper from '../components/GlowSidemenu/GlowSidemenuWrapper'
+import GlowSidemenuNav from '../components/organisms/GlowSidemenuNav'
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -49,7 +49,7 @@ const socialItems = [
       </a>
     </div>
     
-    <GlowSidemenuWrapper 
+    <GlowSidemenuNav 
       items={menuItems} 
       socialItems={socialItems} 
       client:load
