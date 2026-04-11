@@ -6,6 +6,9 @@ import ScrollVelocity from '../components/ScrollVelocity.jsx'
 import BlurText from '../components/BlurText.jsx'
 import MagicBento from '../components/MagicBento.jsx'
 import CircularGallery from '../components/CircularGallery.jsx'
+import { getProducts } from '../lib/api/products.ts'
+
+const products = await getProducts()
 ---
 
 <Layout>
@@ -52,11 +55,9 @@ import CircularGallery from '../components/CircularGallery.jsx'
 
   <div style={{ height: '600px', position: 'relative' }}>
     <CircularGallery
-      bend={3}
-      textColor='#ffffff'
-      borderRadius={0.05}
-      scrollEase={0.02}
+      items={products}
       bend={1}
+      textColor='#ffffff'
       borderRadius={0.05}
       scrollSpeed={2}
       scrollEase={0.05}
