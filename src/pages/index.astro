@@ -10,14 +10,16 @@ import CircularGallery from '../components/CircularGallery.jsx'
 
 <Layout>
   <div class='flex justify-center w-full py-12'>
-    <BlurText
-      text='The Gym Bros Community'
-      delay={200}
-      animateBy='words'
-      direction='top'
-      className='text-6xl font-bold text-primary text-center'
-      client:only='react'
-    />
+    <h1 class='font-heading text-6xl text-primary text-center'>
+      <BlurText
+        text='The Gym Bros Community'
+        delay={200}
+        animateBy='words'
+        direction='top'
+        className='text-6xl text-primary text-center'
+        client:only='react'
+      />
+    </h1>
   </div>
 
   <div style={{ width: '100vw', height: '80vh', position: 'relative' }}>
@@ -44,7 +46,7 @@ import CircularGallery from '../components/CircularGallery.jsx'
     <ScrollVelocity
       texts={['Próximamente', 'Coming Soon']}
       velocity={80}
-      className='custom-scroll-text'
+      className='custom-scroll-text py-2'
       client:only='react'
     />
   </div>
