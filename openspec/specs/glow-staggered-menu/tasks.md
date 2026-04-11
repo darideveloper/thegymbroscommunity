@@ -1,0 +1,6 @@
+- [ ] Create `src/components/GlowStaggeredMenu.jsx`
+- [ ] Create `src/components/GlowStaggeredMenu.css`
+- [ ] Implement open/close logic with GSAP in `GlowStaggeredMenu.jsx`
+- [ ] Apply black theme and text glow styles in `GlowStaggeredMenu.css`
+- [ ] Implement click-away closing logic
+- [ ] Verify functionality on both mobile and desktop
