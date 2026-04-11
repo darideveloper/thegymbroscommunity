@@ -1,5 +1,6 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { isWebGLAvailable } from '../lib/webgl';
 
 import './CircularGallery.css';
 
@@ -294,11 +295,15 @@ class App {
       scrollEase = 0.05
     } = {}
   ) {
-    document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+
+    if (!isWebGLAvailable()) {
+      throw new Error('WebGL not supported');
+    }
+
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -309,14 +314,24 @@ class App {
     this.addEventListeners();
   }
   createRenderer() {
-    this.renderer = new Renderer({
-      alpha: true,
-      antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
-    });
-    this.gl = this.renderer.gl;
-    this.gl.clearColor(0, 0, 0, 0);
-    this.container.appendChild(this.gl.canvas);
+    try {
+        this.renderer = new Renderer({
+          alpha: true,
+          antialias: true,
+          dpr: Math.min(window.devicePixelRatio || 1, 2)
+        });
+        if (!this.renderer.gl) throw new Error('Failed to create WebGL context');
+        this.gl = this.renderer.gl;
+        this.gl.clearColor(0, 0, 0, 0);
+        this.container.appendChild(this.gl.canvas);
+        
+        this.gl.canvas.addEventListener('webglcontextlost', (e) => {
+            e.preventDefault();
+            this.destroy();
+        }, false);
+    } catch (e) {
+        throw new Error('WebGLRenderer initialization failed');
+    }
   }
   createCamera() {
     this.camera = new Camera(this.gl);
@@ -451,25 +466,33 @@ class App {
     window.removeEventListener('touchend', this.boundOnTouchUp);
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
+      // Explicitly clean up context
+      if (this.renderer.gl.getExtension('WEBGL_lose_context')) {
+        this.renderer.gl.getExtension('WEBGL_lose_context').loseContext();
+      }
     }
   }
 }
 
-export default function CircularGallery({
-  items,
-  bend = 3,
-  textColor = '#ffffff',
-  borderRadius = 0.05,
-  font = 'bold 30px Figtree',
-  scrollSpeed = 2,
-  scrollEase = 0.05
-}) {
+export default function CircularGallery(props) {
   const containerRef = useRef(null);
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    let app;
+    try {
+      app = new App(containerRef.current, props);
+    } catch (e) {
+      console.error(e);
+      setHasError(true);
+    }
     return () => {
-      app.destroy();
+      app?.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [props]);
+
+  if (hasError) {
+    return <div className="circular-gallery-fallback">WebGL not supported</div>;
+  }
   return <div className="circular-gallery" ref={containerRef} />;
 }

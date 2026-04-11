@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import clsx from 'clsx';
 import './LaserFlow.css';
 
 const VERT = `
@@ -259,9 +258,7 @@ export const LaserFlow = ({
   decay = 1.1,
   falloffStart = 1.2,
   fogFallSpeed = 0.6,
-  color = '#FF79C6',
-  transparent = false,
-  backgroundColor = '#000000'
+  color = '#FF79C6'
 }) => {
   const mountRef = useRef(null);
   const rendererRef = useRef(null);
@@ -293,7 +290,7 @@ export const LaserFlow = ({
     const mount = mountRef.current;
     const renderer = new THREE.WebGLRenderer({
       antialias: false,
-      alpha: transparent,
+      alpha: false,
       depth: false,
       stencil: false,
       powerPreference: 'high-performance',
@@ -310,13 +307,7 @@ export const LaserFlow = ({
     renderer.setPixelRatio(currentDprRef.current);
     renderer.shadowMap.enabled = false;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    
-    if (transparent) {
-      renderer.setClearColor(0x000000, 0);
-    } else {
-      const bg = hexToRGB(backgroundColor);
-      renderer.setClearColor(new THREE.Color(bg.r, bg.g, bg.b), 1);
-    }
+    renderer.setClearColor(0x000000, 1);
     const canvas = renderer.domElement;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
@@ -359,7 +350,7 @@ export const LaserFlow = ({
       vertexShader: VERT,
       fragmentShader: FRAG,
       uniforms,
-      transparent: transparent || true,
+      transparent: false,
       depthTest: false,
       depthWrite: false,
       blending: THREE.NormalBlending
@@ -587,7 +578,7 @@ export const LaserFlow = ({
     color
   ]);
 
-  return <div ref={mountRef} className={clsx('laser-flow-container', className)} style={style} />;
+  return <div ref={mountRef} className={`laser-flow-container ${className || ''}`} style={style} />;
 };
 
 export default LaserFlow;

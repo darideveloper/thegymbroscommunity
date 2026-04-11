@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/raleway";
-@import "@fontsource-variable/dm-sans";
+@import "@fontsource/pinyon-script";
+@import "@fontsource/lato";
 
 @custom-variant dark (&:is(.dark *));
 @plugin "daisyui" {
@@ -146,9 +146,9 @@
 
 @theme inline {
   --font-sans:
-    'Raleway Variable', sans-serif;
+    'Lato', sans-serif;
   --font-heading:
-    'DM Sans Variable', sans-serif;
+    'Pinyon Script', cursive;
   --color-sidebar-ring:
     var(--sidebar-ring);
   --color-sidebar-border:
