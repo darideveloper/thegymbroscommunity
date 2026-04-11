@@ -4,10 +4,10 @@
 TBD - created by archiving change implement-glow-sidemenu. Update Purpose after archive.
 ## Requirements
 ### Requirement: Black Fade Menu Panel
-The menu panel MUST have a black background and MUST appear with a smooth fade-in animation using GSAP.
+The menu panel MUST have a black background and MUST appear with a smooth, optimized fade-in animation using GSAP. It MUST NOT use `box-shadow` to avoid repaint performance issues during translation, and MUST utilize `will-change: transform, opacity` for hardware acceleration.
 
 #### Scenario: Menu Open
-When the user clicks the menu toggle button, the black panel fades into view from the side or full screen with a background color of `#000`.
+When the user clicks the menu toggle button, the black panel smoothly slides and fades into view without frame drops.
 
 ### Requirement: Glowing Menu Items
 Menu text items SHALL feature a "glow" effect, achieved through CSS text-shadow, making them stand out against the black background.
@@ -16,19 +16,16 @@ Menu text items SHALL feature a "glow" effect, achieved through CSS text-shadow,
 When the menu is open, the text links (e.g., "Home", "About") display a soft, white or neon glow that enhances their visibility and aesthetic.
 
 ### Requirement: GSAP Staggered Entrance
-Menu items SHALL animate into view sequentially (staggered) after the main panel has faded in.
+Menu items SHALL animate into view sequentially (staggered) after the main panel has faded in, using snappy timings (e.g., 0.3s duration, 0.05s stagger) and MUST utilize `will-change: transform, opacity` to ensure 60fps performance. They MUST use `autoAlpha` instead of `opacity` in GSAP for performance.
 
 #### Scenario: Staggered Loading
-When the menu opens, the links do not appear all at once but animate from `opacity: 0` to `opacity: 1` and/or `y: 20` to `y: 0` with a 0.1s stagger between them.
+When the menu opens, the links animate rapidly from `autoAlpha: 0` to `autoAlpha: 1` and `y: 20` to `y: 0`, feeling immediately responsive. Also, the `.glow-sidemenu-link` hover transitions MUST use specific CSS properties instead of `all`.
 
 ### Requirement: Close Interaction (Click Outside & Close Button)
-The menu SHALL close when the user interacts with the close button or clicks any area outside the main content of the menu.
-
-#### Scenario: Close Button
-Clicking a "Close" (X) icon within the menu panel triggers the GSAP closing timeline, fading the menu out.
+The menu SHALL close when the user interacts with the close button or clicks any area outside the main content of the menu. The overlay MUST use a solid semi-transparent background color, MUST NOT use `backdrop-filter: blur`, and MUST use `will-change: opacity` to prevent GPU bottlenecks during opacity animations.
 
 #### Scenario: Click Outside
-Clicking on the background overlay or any area not part of the active menu items triggers the closing animation.
+Clicking on the dark background overlay triggers the closing animation, which executes smoothly without causing browser layout thrashing.
 
 ### Requirement: Responsive Toggle Button
 A menu toggle button MUST be available and functional on both mobile (viewport < 768px) and desktop resolutions.

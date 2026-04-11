@@ -76,7 +76,7 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
   display: inline-block;
   
   /* The Glow Effect */

@@ -37,14 +37,14 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
       // Initialize hidden state
       gsap.set('.glow-sidemenu-panel', { xPercent: 100, autoAlpha: 0 })
       gsap.set('.glow-sidemenu-overlay', { autoAlpha: 0 })
-      gsap.set('.glow-sidemenu-item', { y: 20, opacity: 0 })
+      gsap.set('.glow-sidemenu-item', { y: 20, autoAlpha: 0 })
 
       // Create timeline
       timelineRef.current = gsap
         .timeline({ paused: true })
         .to('.glow-sidemenu-overlay', {
           autoAlpha: 1,
-          duration: 0.4,
+          duration: 0.45,
           ease: 'power2.out',
         })
         .to(
@@ -55,18 +55,18 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
             duration: 0.6,
             ease: 'power3.out',
           },
-          '-=0.2',
+          '-=0.3',
         )
         .to(
           '.glow-sidemenu-item',
           {
             y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'back.out(1.7)',
+            autoAlpha: 1,
+            duration: 0.45,
+            stagger: 0.075,
+            ease: 'back.out(1.2)',
           },
-          '-=0.3',
+          '-=0.45',
         )
     }, containerRef)
 
