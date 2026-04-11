@@ -113,9 +113,6 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
               className='glow-sidemenu-logo h-16 w-auto transition-transform duration-300'
               draggable={false}
             />
-            <h1 className="text-white font-black text-2xl uppercase tracking-tighter">
-              TGC
-            </h1>
           </div>
           <button
             className='glow-sidemenu-close bg-transparent border-none text-white cursor-pointer p-2 flex items-center justify-center transition-transform duration-200 ease-out hover:scale-110'
