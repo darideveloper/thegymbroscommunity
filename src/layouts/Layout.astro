@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import GlowSidemenuNav from '../components/organisms/GlowSidemenuNav'
+import Header from '../components/organisms/Header.astro'
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -43,17 +43,7 @@ const socialItems = [
     <title>Astro Basics</title>
   </head>
   <body class='bg-[#060010]'>
-    <div style={{ position: 'fixed', top: '1.5rem', left: '1.5rem', zIndex: 100 }}>
-      <a href='/'>
-        <img src='/assets/logo.webp' alt='TGC Logo' class='w-24 h-24' />
-      </a>
-    </div>
-    
-    <GlowSidemenuNav 
-      items={menuItems} 
-      socialItems={socialItems} 
-      client:load
-    />
+    <Header />
 
     <slot />
   </body>

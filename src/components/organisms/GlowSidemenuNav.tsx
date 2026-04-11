@@ -16,17 +16,19 @@ interface SocialItem {
 interface GlowSidemenuNavProps {
   items: MenuItem[];
   socialItems?: SocialItem[];
+  className?: string;
 }
 
 export const GlowSidemenuNav: React.FC<GlowSidemenuNavProps> = ({
   items,
-  socialItems
+  socialItems,
+  className = ""
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <div className="fixed top-8 right-8 z-50">
+      <div className={className}>
         <GlowSidemenuToggle onClick={() => setIsOpen(true)} />
       </div>
       <GlowSidemenu 

@@ -168,9 +168,12 @@ class Media {
         }
         
         void main() {
+          float planeAspect = uPlaneSizes.x / max(uPlaneSizes.y, 0.001);
+          float imageAspect = uImageSizes.x / max(uImageSizes.y, 0.001);
+          
           vec2 ratio = vec2(
-            min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
-            min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+            min(planeAspect / imageAspect, 1.0),
+            min(imageAspect / planeAspect, 1.0)
           );
           vec2 uv = vec2(
             vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
@@ -189,8 +192,8 @@ class Media {
       `,
       uniforms: {
         tMap: { value: texture },
-        uPlaneSizes: { value: [0, 0] },
-        uImageSizes: { value: [0, 0] },
+        uPlaneSizes: { value: [1, 1] },
+        uImageSizes: { value: [1, 1] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
         uBorderRadius: { value: this.borderRadius }
@@ -198,15 +201,15 @@ class Media {
       transparent: true
     });
     const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = this.image;
     img.onload = () => {
       texture.image = img;
+      texture.needsUpdate = true;
       this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
     };
     img.onerror = (e) => {
       console.error('Failed to load image:', this.image, e);
     };
+    img.src = this.image;
   }
   createMesh() {
     this.plane = new Mesh(this.gl, {
