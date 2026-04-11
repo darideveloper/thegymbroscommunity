@@ -1,0 +1,29 @@
+# Tasks: 100% Tailwind Migration
+
+- [x] Define custom theme tokens in `src/styles/global.css`.
+    - [x] Add `--text-shadow-glow` and `--text-shadow-glow-hover` in `@theme inline`.
+    - [x] Define `.shadow-glow` and `.hover\:shadow-glow-strong` utilities.
+    - [x] Verify Tailwind v4 builds correctly with new theme tokens.
+- [x] Migrate `src/components/atoms/TGCLogo.astro`.
+    - [x] Remove inline `style`.
+    - [x] Add `tracking-[0.3em]`.
+    - [x] Verify layout remains unchanged.
+- [x] Migrate `src/components/organisms/GlowSidemenu.tsx`.
+    - [x] Add Tailwind classes to `.glow-sidemenu-panel` (fixed, inset, bg, etc.).
+    - [x] Add Tailwind classes to `.glow-sidemenu-overlay` (fixed, inset, bg, blur, etc.).
+    - [x] Add Tailwind classes to header, logo, and close button.
+    - [x] Add Tailwind classes to navigation list and items.
+    - [x] Apply `shadow-glow` and `hover:shadow-glow-strong` to links.
+    - [x] Ensure `will-change-*` utilities are applied to animated elements.
+    - [x] Remove `import './GlowSidemenu.css'`.
+    - [x] Delete `src/components/organisms/GlowSidemenu.css`.
+- [x] Migrate `src/components/organisms/Hero.astro`.
+    - [x] Replace inline `style` with `w-screen h-[80vh] relative`.
+- [x] Migrate `src/components/organisms/ProductShowcase.astro`.
+    - [x] Replace inline `style` with `h-[600px] relative`.
+- [x] Update `src/components/atoms/ErrorBoundary.jsx`.
+    - [x] Add Tailwind classes to the fallback `div`.
+- [x] Final Validation.
+    - [x] Run `npm run build` to ensure no CSS errors.
+    - [x] Visually verify side menu animations and glow effects.
+    - [x] Ensure all custom components are free of static inline styles.

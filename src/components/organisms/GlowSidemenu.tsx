@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { X } from 'lucide-react'
-import './GlowSidemenu.css'
 
 interface MenuItem {
   label: string
@@ -97,24 +96,29 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
   return (
     <div ref={containerRef}>
       <div
-        className='glow-sidemenu-overlay'
+        className='glow-sidemenu-overlay fixed inset-0 bg-black/70 backdrop-blur-sm z-90 opacity-0 invisible'
         onClick={onClose}
         aria-hidden='true'
       />
       <aside
-        className='glow-sidemenu-panel'
+        className='glow-sidemenu-panel fixed top-0 right-0 w-full sm:max-w-[450px] h-screen bg-black z-100 flex flex-col p-8 shadow-[-10px_0_30px_rgba(0,0,0,0.5)] invisible will-change-transform'
         aria-label='Side Navigation'
         aria-hidden={!isOpen}
       >
-        <header className='glow-sidemenu-header'>
-          <img
-            src={logoUrl}
-            alt='Logo'
-            className='glow-sidemenu-logo'
-            draggable={false}
-          />
+        <header className='glow-sidemenu-header flex justify-between items-center mb-16'>
+          <div className="flex items-center gap-4">
+            <img
+              src={logoUrl}
+              alt='Logo'
+              className='glow-sidemenu-logo h-16 w-auto transition-transform duration-300'
+              draggable={false}
+            />
+            <h1 className="text-white font-black text-2xl uppercase tracking-tighter">
+              TGC
+            </h1>
+          </div>
           <button
-            className='glow-sidemenu-close'
+            className='glow-sidemenu-close bg-transparent border-none text-white cursor-pointer p-2 flex items-center justify-center transition-transform duration-200 ease-out hover:scale-110'
             onClick={onClose}
             aria-label='Close Menu'
           >
@@ -124,17 +128,17 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
 
         <nav className='glow-sidemenu-nav'>
           <ul
-            className='glow-sidemenu-list'
+            className='glow-sidemenu-list list-none p-0 m-0 flex flex-col gap-8'
             role='list'
           >
             {items.map((item, index) => (
               <li
                 key={index}
-                className='glow-sidemenu-item'
+                className='glow-sidemenu-item will-change-transform will-change-opacity'
               >
                 <a
                   href={item.link}
-                  className='glow-sidemenu-link'
+                  className='glow-sidemenu-link font-sans text-[2rem] sm:text-[2.5rem] font-extrabold text-white no-underline uppercase tracking-[2px] transition-[color,text-shadow,transform] duration-300 ease-in-out inline-block shadow-glow hover:shadow-glow-strong hover:translate-x-[10px]'
                   aria-label={item.ariaLabel}
                   onClick={onClose}
                 >
@@ -146,14 +150,14 @@ export const GlowSidemenu: React.FC<GlowSidemenuProps> = ({
         </nav>
 
         {socialItems.length > 0 && (
-          <div className='glow-sidemenu-socials'>
+          <div className='glow-sidemenu-socials mt-auto flex gap-6 pb-8'>
             {socialItems.map((social, index) => (
               <a
                 key={index}
                 href={social.link}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='glow-sidemenu-social-link'
+                className='glow-sidemenu-social-link text-gray-500 no-underline text-base transition-colors duration-300 ease-in-out hover:text-white'
               >
                 {social.label}
               </a>

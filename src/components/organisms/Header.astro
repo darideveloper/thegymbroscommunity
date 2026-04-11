@@ -16,21 +16,31 @@ const socialItems = [
 ]
 ---
 
-<header id="main-header" class="fixed top-0 left-0 w-full z-[100] transition-all duration-300 ease-in-out px-8 py-6 grid grid-cols-3 items-center bg-black/30 backdrop-blur-md border-b border-white/10 header-liquid-crystal">
+<header 
+  id="main-header" 
+  class="group fixed top-0 left-0 w-full z-[100] transition-all duration-300 ease-in-out px-8 py-8 grid grid-cols-3 items-center bg-black/30 backdrop-blur-md border-b border-white/10 bg-linear-135 from-white/5 to-white/1 shadow-[0_4px_30px_rgba(0,0,0,0.5),inset_0_0_10px_rgba(255,255,255,0.05)] data-[scrolled=true]:py-2 data-[scrolled=true]:bg-black/80 data-[scrolled=true]:backdrop-blur-[24px]"
+>
   <div class="flex items-center justify-self-start">
-    <a href="/" class="group">
-      <img src="/assets/logo.webp" alt="TGC Logo" id="header-logo" class="w-16 h-16 transition-all duration-300 group-hover:scale-110" />
+    <a href="/" class="group/logo">
+      <img 
+        src="/assets/logo.webp" 
+        alt="TGC Logo" 
+        id="header-logo" 
+        class="w-20 h-20 transition-all duration-300 group-hover/logo:scale-110 group-data-[scrolled=true]:w-10 group-data-[scrolled=true]:h-10" 
+      />
     </a>
   </div>
   
   <div class="flex items-center justify-center">
-    <h1 id="header-title-container" class="font-black text-base sm:text-2xl text-primary transition-all duration-300 text-center">
+    <h1 
+      id="header-title-container" 
+      class="font-black text-lg sm:text-3xl text-primary transition-all duration-300 text-center group-data-[scrolled=true]:text-[0.7rem] sm:group-data-[scrolled=true]:text-[1.05rem]"
+    >
       <BlurText
         text="The Gym Bros Community"
         delay={150}
         animateBy="words"
-        direction="top"
-        className="text-primary font-black uppercase tracking-tighter justify-center"
+        className="text-primary font-black uppercase tracking-tighter justify-center transition-all duration-300"
         client:only="react"
       />
     </h1>
@@ -46,61 +56,14 @@ const socialItems = [
   </div>
 </header>
 
-<style>
-  .header-liquid-crystal {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.01)
-    );
-    box-shadow: 
-      0 4px 30px rgba(0, 0, 0, 0.5),
-      inset 0 0 10px rgba(255, 255, 255, 0.05);
-  }
-
-  :global(.header-scrolled) {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-    background-color: rgba(0, 0, 0, 0.8) !important;
-    backdrop-filter: blur(24px) !important;
-  }
-
-  :global(.header-scrolled) #header-logo {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-  }
-
-  :global(.header-scrolled) #header-title-container {
-    font-size: 0.7rem !important; /* ~30% reduction from 1rem */
-  }
-  
-  /* Media query for larger screens when scrolled */
-  @media (min-width: 640px) {
-    :global(.header-scrolled) #header-title-container {
-      font-size: 1.05rem !important; /* ~30% reduction from 1.5rem */
-    }
-  }
-  
-  /* We need to affect the BlurText spans if possible */
-  :global(.header-scrolled) #header-title-container p,
-  :global(.header-scrolled) #header-title-container span {
-    font-size: inherit !important;
-  }
-  
-  #header-title-container p,
-  #header-title-container span {
-    transition: all 0.3s ease-in-out;
-  }
-</style>
-
 <script>
   const header = document.getElementById('main-header');
   
   const handleScroll = () => {
     if (window.scrollY > 50) {
-      header?.classList.add('header-scrolled');
+      header?.setAttribute('data-scrolled', 'true');
     } else {
-      header?.classList.remove('header-scrolled');
+      header?.removeAttribute('data-scrolled');
     }
   };
 
