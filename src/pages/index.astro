@@ -14,7 +14,7 @@ const products = await getProducts()
 
 <Layout>
   <div class='flex flex-col items-center w-full py-12 gap-8'>
-    <h1 class='font-heading text-6xl text-primary text-center'>
+    <h1 class='font-black text-6xl text-primary text-center'>
       <BlurText
         text='The Gym Bros Community'
         delay={200}
@@ -24,9 +24,9 @@ const products = await getProducts()
         client:only='react'
       />
     </h1>
-    
-    <Countdown 
-      targetDate='2027-12-31T00:00:00' 
+
+    <Countdown
+      targetDate='2027-12-31T00:00:00'
       className='mt-4'
       client:only='react'
     />
