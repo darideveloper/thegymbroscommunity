@@ -7,20 +7,11 @@ import BlurText from '../components/atoms/react-bits/BlurText.jsx'
 import { getProducts } from '../lib/api/products.ts'
 
 const products = await getProducts()
+const countdownTarget = import.meta.env.PUBLIC_COUNTDOWN_TARGET_DATE
 ---
 
 <Layout>
-  <Hero>
-    <h1 class='font-black text-6xl text-primary text-center'>
-      <BlurText
-        text='The Gym Bros Community'
-        delay={200}
-        animateBy='words'
-        direction='top'
-        className='text-6xl text-primary text-center'
-        client:only='react'
-      />
-    </h1>
+  <Hero targetDate={countdownTarget}>
   </Hero>
 
   <ProductShowcase products={products} />

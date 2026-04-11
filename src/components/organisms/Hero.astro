@@ -1,6 +1,8 @@
 ---
 import LaserFlow from '../molecules/react-bits/LaserFlow.jsx'
 import Countdown from '../molecules/Countdown.jsx'
+
+const { targetDate } = Astro.props
 ---
 
 <section class='relative w-full overflow-hidden'>
@@ -8,7 +10,7 @@ import Countdown from '../molecules/Countdown.jsx'
     <slot />
     
     <Countdown
-      targetDate='2027-12-31T00:00:00'
+      targetDate={targetDate}
       className='mt-4'
       client:only='react'
     />

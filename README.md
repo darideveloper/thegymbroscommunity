@@ -41,6 +41,16 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## 🔑 Environment Variables
+
+This project requires the following environment variables:
+
+| Variable                        | Description                                     | Example               |
+| :------------------------------ | :---------------------------------------------- | :-------------------- |
+| `PUBLIC_COUNTDOWN_TARGET_DATE`  | The target date for the countdown in the Hero section. | `2027-12-31T00:00:00` |
+
+Refer to `.env.example` for a template.
+
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
