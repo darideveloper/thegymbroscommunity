@@ -24,3 +24,9 @@ pnpm-debug.log*
 .idea/
 
 *.temp
+
+# Ignore proposals
+openspec/changes/*
+
+# Do not ignore archived proposals
+!openspec/changes/archive/
