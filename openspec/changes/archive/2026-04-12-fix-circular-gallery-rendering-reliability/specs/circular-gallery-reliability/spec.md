@@ -1,8 +1,6 @@
-# circular-gallery-reliability Specification
+# circular-gallery-reliability Specification Delta
 
-## Purpose
-TBD - created by archiving change fix-circular-gallery-image-loading. Update Purpose after archive.
-## Requirements
+## MODIFIED Requirements
 ### Requirement: CircularGallery Rendering
 - The `CircularGallery` component SHALL handle image loading such that the `onload` handler is registered before loading begins.
 - The `CircularGallery` component SHALL update the WebGL texture immediately upon image load completion.
@@ -14,14 +12,7 @@ TBD - created by archiving change fix-circular-gallery-image-loading. Update Pur
 - **WHEN** those images are already in the browser cache or loaded fresh
 - **THEN** all images SHALL be correctly displayed on their respective 3D planes without loading race conditions or driver panics.
 
-### Requirement: Shader Robustness
-- The `CircularGallery` shader SHALL be robust against division by zero in aspect ratio calculations by using a small epsilon (e.g., 0.001) for dimensions.
-- The `CircularGallery` uniforms for image and plane sizes SHALL be initialized to non-zero values (e.g., `[1, 1]`) to prevent `NaN` during startup.
-
-#### Scenario: Smooth Startup
-- **WHEN** the `CircularGallery` first mounts and before all image dimensions are fully calculated
-- **THEN** the component SHALL NOT produce WebGL errors or render `NaN`-filled fragments.
-
+## ADDED Requirements
 ### Requirement: Title Font Propagation
 - The `CircularGallery` SHALL pass the `font` property correctly to the `Title` constructor.
 - The `CircularGallery` SHALL safely extract numeric font sizes from CSS font shorthand strings using regular expressions to prevent `NaN` canvas dimensions.
@@ -30,4 +21,3 @@ TBD - created by archiving change fix-circular-gallery-image-loading. Update Pur
 - **GIVEN** a `CircularGallery` with a custom `font` prop (e.g., "bold 30px Figtree")
 - **WHEN** product titles are rendered
 - **THEN** the titles SHALL use the specified font and avoid triggering `INVALID_VALUE: texImage2D: no canvas` errors.
-
