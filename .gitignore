@@ -30,3 +30,6 @@ openspec/changes/*
 
 # Do not ignore archived proposals
 !openspec/changes/archive/
+
+# skip docs
+docs/

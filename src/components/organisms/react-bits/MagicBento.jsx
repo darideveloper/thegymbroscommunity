@@ -11,39 +11,39 @@ const MOBILE_BREAKPOINT = 768;
 const cardData = [
   {
     color: '#060010',
-    title: 'Analytics',
-    description: 'Track user behavior',
-    label: 'Insights'
+    title: 'ARMADURA DE ÉLITE',
+    description: 'Diseñada para el guerrero moderno del gimnasio.',
+    label: 'FUERZA'
   },
   {
     color: '#060010',
-    title: 'Dashboard',
-    description: 'Centralized data view',
-    label: 'Overview'
+    title: 'PODER EN MOVIMIENTO',
+    description: 'Telas que se adaptan a cada una de tus repeticiones.',
+    label: 'AGILIDAD'
   },
   {
     color: '#060010',
-    title: 'Collaboration',
-    description: 'Work together seamlessly',
-    label: 'Teamwork'
+    title: 'ESPÍRITU DE LUCHA',
+    description: 'Ropa que grita determinación en cada serie.',
+    label: 'PASIÓN'
   },
   {
     color: '#060010',
-    title: 'Automation',
-    description: 'Streamline workflows',
-    label: 'Efficiency'
+    title: 'INGENIERÍA FITNESS',
+    description: 'Máxima transpirabilidad para entrenamientos explosivos.',
+    label: 'POTENCIA'
   },
   {
     color: '#060010',
-    title: 'Integration',
-    description: 'Connect favorite tools',
-    label: 'Connectivity'
+    title: 'ESTILO DOMINANTE',
+    description: 'Domina el rack con diseños que imponen respeto.',
+    label: 'ACTITUD'
   },
   {
     color: '#060010',
-    title: 'Security',
-    description: 'Enterprise-grade protection',
-    label: 'Protection'
+    title: 'EQUIPO SIN LÍMITES',
+    description: 'Resistencia extrema para quienes no conocen el descanso.',
+    label: 'RESISTENCIA'
   }
 ];
 

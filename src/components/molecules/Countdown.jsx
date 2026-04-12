@@ -45,13 +45,13 @@ const Countdown = ({ targetDate, className }) => {
   return (
     <div 
       role="timer" 
-      aria-label={`Countdown to ${new Date(targetDate).toLocaleDateString()}`}
+      aria-label={`PRÓXIMO LANZAMIENTO: ${new Date(targetDate).toLocaleDateString()}`}
       className={cn('flex flex-wrap gap-4 md:gap-8 justify-center items-center select-none', className)}
     >
-      <TimeUnit value={timeLeft.days} label="Days" />
-      <TimeUnit value={timeLeft.hours} label="Hours" />
-      <TimeUnit value={timeLeft.minutes} label="Minutes" />
-      <TimeUnit value={timeLeft.seconds} label="Seconds" />
+      <TimeUnit value={timeLeft.days} label="DÍAS" />
+      <TimeUnit value={timeLeft.hours} label="HORAS" />
+      <TimeUnit value={timeLeft.minutes} label="MINS" />
+      <TimeUnit value={timeLeft.seconds} label="SEGS" />
     </div>
   );
 };

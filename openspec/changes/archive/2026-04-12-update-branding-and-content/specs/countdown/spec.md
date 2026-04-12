@@ -1,8 +1,5 @@
-# Capability: Countdown
+## MODIFIED Requirements
 
-## Purpose
-This specification defines the behavior of the countdown capability, which provides a visual timer counting down to a configurable target date.
-## Requirements
 ### Requirement: Display Remaining Time
 The system SHALL display the remaining days, hours, minutes, and seconds until a specified target date using Spanish labels ("DÍAS", "HORAS", "MINS", "SEGS").
 
@@ -10,12 +7,7 @@ The system SHALL display the remaining days, hours, minutes, and seconds until a
 - **WHEN** the countdown is rendered
 - **THEN** the time unit labels MUST be "DÍAS", "HORAS", "MINS", and "SEGS".
 
-### Requirement: Target Date Configuration
-The target date for the countdown MUST be configurable via environment variables.
-
-#### Scenario: Configuration via Environment Variable
-- **WHEN** `PUBLIC_COUNTDOWN_TARGET_DATE` is set in the environment
-- **THEN** the system uses this value as the target date.
+## ADDED Requirements
 
 ### Requirement: Localized Accessibility Strings
 The countdown component MUST provide descriptive accessibility strings (aria-labels) in Spanish that match the brand voice.
@@ -24,4 +16,3 @@ The countdown component MUST provide descriptive accessibility strings (aria-lab
 - **GIVEN** a screen reader is active
 - **WHEN** focusing the countdown
 - **THEN** it MUST be announced as "PRÓXIMO LANZAMIENTO: [Date]".
-

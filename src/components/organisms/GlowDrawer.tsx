@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { useGlowDrawerAnimation } from '../../hooks/useGlowDrawerAnimation';
@@ -17,16 +17,11 @@ export function GlowDrawer({
   onClose,
   children,
   logoUrl = '/assets/logo.webp',
-  title = "Side Navigation"
+  title = "CENTRO DE MANDO"
 }: GlowDrawerProps) {
-  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   useGlowDrawerAnimation(isOpen, containerRef);
   useScrollLock(isOpen);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -39,7 +34,7 @@ export function GlowDrawer({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (!isMounted || typeof document === 'undefined') return null;
+  if (typeof document === 'undefined') return null;
 
   return createPortal(
     <div ref={containerRef} className="relative z-100">
@@ -57,7 +52,7 @@ export function GlowDrawer({
           <div className="flex items-center gap-4">
             <img
               src={logoUrl}
-              alt='Logo'
+              alt='LOGO DE THE GYM BROS'
               className='glow-sidemenu-logo h-16 w-auto transition-transform duration-300'
               draggable={false}
             />
@@ -65,7 +60,7 @@ export function GlowDrawer({
           <button
             className='glow-sidemenu-close bg-transparent border-none text-white cursor-pointer p-2 flex items-center justify-center transition-transform duration-200 ease-out hover:scale-110'
             onClick={onClose}
-            aria-label='Close Menu'
+            aria-label='VOLVER'
           >
             <X size={32} />
           </button>
