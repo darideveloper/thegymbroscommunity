@@ -1,19 +1,6 @@
 ---
 import '../styles/global.css'
 import Header from '../components/organisms/Header.astro'
-
-const menuItems = [
-  { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
-  { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
-  { label: 'Services', ariaLabel: 'View our services', link: '/services' },
-  { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' },
-]
-
-const socialItems = [
-  { label: 'Twitter', link: 'https://twitter.com' },
-  { label: 'GitHub', link: 'https://github.com' },
-  { label: 'LinkedIn', link: 'https://linkedin.com' },
-]
 ---
 
 <!doctype html>
@@ -42,7 +29,9 @@ const socialItems = [
     />
     <title>Astro Basics</title>
   </head>
-  <body class='bg-[#060010]'>
+  <body class='relative min-h-screen bg-transparent'>
+    <!-- Base background layer -->
+    <div class="fixed inset-0 z-[-20] bg-[#060010]" aria-hidden="true"></div>
     <Header />
 
     <slot />
