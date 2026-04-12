@@ -1,10 +1,16 @@
 ---
+import clsx from 'clsx';
 
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
 <a
   href='/'
-  class='text-white font-heading text-4xl tracking-[0.3em]'
+  class={clsx('text-white font-heading text-4xl tracking-[0.3em] transition-all duration-300', className)}
 >
   TGC
 </a>
