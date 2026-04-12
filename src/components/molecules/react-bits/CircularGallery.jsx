@@ -46,7 +46,7 @@ function createTextTexture(gl, text, font = 'bold 30px monospace', color = 'blac
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, textColor = '#545050', font = '30px sans-serif' }) {
+  constructor({ gl, plane, renderer, text, textColor = '#ffffff', font = '30px sans-serif' }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -60,6 +60,8 @@ class Title {
     const { texture, width, height } = createTextTexture(this.gl, this.text, this.font, this.textColor);
     const geometry = new Plane(this.gl);
     const program = new Program(this.gl, {
+      depthTest: false,
+      depthWrite: false,
       vertex: `
         attribute vec3 position;
         attribute vec2 uv;
@@ -74,22 +76,27 @@ class Title {
       fragment: `
         precision highp float;
         uniform sampler2D tMap;
+        uniform float uHover;
         varying vec2 vUv;
         void main() {
           vec4 color = texture2D(tMap, vUv);
-          if (color.a < 0.1) discard;
-          gl_FragColor = color;
+          if (color.a < 0.01) discard;
+          gl_FragColor = vec4(color.rgb, color.a * uHover);
         }
       `,
-      uniforms: { tMap: { value: texture } },
+      uniforms: { 
+        tMap: { value: texture },
+        uHover: { value: 0 }
+      },
       transparent: true
     });
     this.mesh = new Mesh(this.gl, { geometry, program });
     const aspect = width / height;
-    const textHeight = this.plane.scale.y * 0.15;
+    const textHeight = this.plane.scale.y * 0.25;
     const textWidth = textHeight * aspect;
     this.mesh.scale.set(textWidth, textHeight, 1);
-    this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
+    this.mesh.position.y = 0;
+    this.mesh.position.z = 0.5;
     this.mesh.setParent(this.plane);
   }
 }
@@ -112,6 +119,7 @@ class Media {
     font
   }) {
     this.extra = 0;
+    this.hover = 0;
     this.geometry = geometry;
     this.gl = gl;
     this.image = image;
@@ -160,6 +168,7 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
+        uniform float uHover;
         varying vec2 vUv;
         
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
@@ -180,15 +189,30 @@ class Media {
             vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
             vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
           );
-          vec4 color = texture2D(tMap, uv);
           
+          // Constant blur effect
+          float blur = 0.015;
+          vec4 color = vec4(0.0);
+          color += texture2D(tMap, uv + vec2(-blur, -blur)) * 0.0625;
+          color += texture2D(tMap, uv + vec2(-blur, 0.0)) * 0.125;
+          color += texture2D(tMap, uv + vec2(-blur, blur)) * 0.0625;
+          color += texture2D(tMap, uv + vec2(0.0, -blur)) * 0.125;
+          color += texture2D(tMap, uv + vec2(0.0, 0.0)) * 0.25;
+          color += texture2D(tMap, uv + vec2(0.0, blur)) * 0.125;
+          color += texture2D(tMap, uv + vec2(blur, -blur)) * 0.0625;
+          color += texture2D(tMap, uv + vec2(blur, 0.0)) * 0.125;
+          color += texture2D(tMap, uv + vec2(blur, blur)) * 0.0625;
+          
+          // On hover, add black overlay (80% dark)
+          vec3 finalColor = mix(color.rgb, vec3(0.0), uHover * 0.8);
+
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
           // Smooth antialiasing for edges
           float edgeSmooth = 0.002;
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
-          gl_FragColor = vec4(color.rgb, alpha);
+          gl_FragColor = vec4(finalColor, alpha);
         }
       `,
       uniforms: {
@@ -197,7 +221,8 @@ class Media {
         uImageSizes: { value: [1, 1] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
-        uBorderRadius: { value: this.borderRadius }
+        uBorderRadius: { value: this.borderRadius },
+        uHover: { value: 0 }
       },
       transparent: true
     });
@@ -225,7 +250,7 @@ class Media {
       font: this.font
     });
   }
-  update(scroll, direction) {
+  update(scroll, direction, mouse) {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
     const x = this.plane.position.x;
@@ -252,6 +277,19 @@ class Media {
     this.speed = scroll.current - scroll.last;
     this.program.uniforms.uTime.value += 0.04;
     this.program.uniforms.uSpeed.value = this.speed;
+
+    // Hover logic
+    const isHovered = mouse && 
+      mouse.x > this.plane.position.x - this.plane.scale.x / 2 &&
+      mouse.x < this.plane.position.x + this.plane.scale.x / 2 &&
+      mouse.y > this.plane.position.y - this.plane.scale.y / 2 &&
+      mouse.y < this.plane.position.y + this.plane.scale.y / 2;
+
+    this.hover = lerp(this.hover, isHovered ? 1 : 0, 0.1);
+    this.program.uniforms.uHover.value = this.hover;
+    if (this.title) {
+      this.title.mesh.program.uniforms.uHover.value = this.hover;
+    }
 
     const planeOffset = this.plane.scale.x / 2;
     const viewportOffset = this.viewport.width / 2;
@@ -302,6 +340,7 @@ class App {
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+    this.mouse = { x: 0, y: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
     this.createRenderer();
     this.createCamera();
@@ -392,6 +431,17 @@ class App {
     this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
     this.onCheckDebounce();
   }
+  onMouseMove(e) {
+    const rect = this.container.getBoundingClientRect();
+    const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+    const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+    
+    const normalizedX = (x / this.screen.width) * 2 - 1;
+    const normalizedY = -(y / this.screen.height) * 2 + 1;
+    
+    this.mouse.x = (normalizedX * this.viewport.width) / 2;
+    this.mouse.y = (normalizedY * this.viewport.height) / 2;
+  }
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
     const width = this.medias[0].width;
@@ -420,7 +470,7 @@ class App {
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
-      this.medias.forEach(media => media.update(this.scroll, direction));
+      this.medias.forEach(media => media.update(this.scroll, direction, this.mouse));
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
@@ -432,6 +482,7 @@ class App {
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
+    this.boundOnMouseMove = this.onMouseMove.bind(this);
     window.addEventListener('resize', this.boundOnResize);
     window.addEventListener('mousewheel', this.boundOnWheel);
     window.addEventListener('wheel', this.boundOnWheel);
@@ -441,6 +492,7 @@ class App {
     window.addEventListener('touchstart', this.boundOnTouchDown);
     window.addEventListener('touchmove', this.boundOnTouchMove);
     window.addEventListener('touchend', this.boundOnTouchUp);
+    window.addEventListener('mousemove', this.boundOnMouseMove);
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
@@ -453,6 +505,7 @@ class App {
     window.removeEventListener('touchstart', this.boundOnTouchDown);
     window.removeEventListener('touchmove', this.boundOnTouchMove);
     window.removeEventListener('touchend', this.boundOnTouchUp);
+    window.removeEventListener('mousemove', this.boundOnMouseMove);
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
     }
