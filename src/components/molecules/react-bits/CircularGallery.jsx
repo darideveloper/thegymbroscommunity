@@ -92,9 +92,19 @@ class Title {
     });
     this.mesh = new Mesh(this.gl, { geometry, program });
     const aspect = width / height;
-    const textHeight = this.plane.scale.y * 0.25;
-    const textWidth = textHeight * aspect;
-    this.mesh.scale.set(textWidth, textHeight, 1);
+    const initialHeight = this.plane.scale.y * 0.25;
+    const initialWidth = initialHeight * aspect;
+    const maxWidth = 0.8;
+
+    if (initialWidth > maxWidth) {
+      const reductionRatio = maxWidth / initialWidth;
+      const finalWidth = maxWidth;
+      const finalHeight = initialHeight * reductionRatio;
+      this.mesh.scale.set(finalWidth, finalHeight, 1);
+    } else {
+      this.mesh.scale.set(initialWidth, initialHeight, 1);
+    }
+
     this.mesh.position.y = 0;
     this.mesh.position.z = 0.5;
     this.mesh.setParent(this.plane);
