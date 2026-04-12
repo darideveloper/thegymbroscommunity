@@ -11,7 +11,7 @@ interface GlowDrawerToggleProps {
 export function GlowDrawerToggle({
   onClick,
   className = '',
-  label = "SUBE DE NIVEL",
+  label = "MENU",
   color = '#fff'
 }: GlowDrawerToggleProps) {
   return (

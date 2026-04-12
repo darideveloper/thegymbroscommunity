@@ -19,12 +19,12 @@ The site's main title (H1, "The Gym Bros Community") MUST be prominently display
 - **THEN** the H1 MUST display "The Gym Bros Community" using the `BlurText` component, and be positioned exactly in the middle grid cell.
 
 ### Requirement: Shrinking Scroll Effect
-The header, logo, and H1 font size MUST shrink dynamically when the user scrolls down (e.g., more than 50px).
+The header, logo, and H1 font size MUST shrink dynamically when the user scrolls down (e.g., more than 50px). Additionally, the font sizes for both the logo and the H1 MUST be explicitly reduced by ~30% for mobile devices in both scrolled and unscrolled states, while maintaining larger text sizes on desktop (sm breakpoint and above).
 
 #### Scenario: Shrink on scroll
 - **GIVEN** the user is at the top of the page
 - **WHEN** the user scrolls down beyond 50px
-- **THEN** the header's height MUST decrease, the logo MUST scale down, and the H1 font size MUST smoothly transition to an approximately 30% smaller size using tailwind classes triggered by a JavaScript scroll event listener.
+- **THEN** the header's height MUST decrease, the logo MUST scale down, and the H1 font size MUST smoothly transition to a smaller size using tailwind classes triggered by a JavaScript scroll event listener. On mobile devices, these text sizes MUST be 30% smaller than their previous defaults in all states.
 
 ### Requirement: Thematic Navigation Labels
 Navigation labels MUST use high-energy Spanish terminology that reflects the "Gym Bros" brand voice.

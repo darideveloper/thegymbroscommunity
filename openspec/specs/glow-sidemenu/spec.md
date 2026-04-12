@@ -31,7 +31,7 @@ The menu SHALL close when the user interacts with the close button or clicks any
 Clicking on the dark background overlay triggers the closing animation, which executes smoothly without causing browser layout thrashing.
 
 ### Requirement: Responsive Toggle Button
-A menu toggle button MUST be integrated into the `Header.astro` component on the right-most section of the header. The component MUST be refactored to support flexible, position-agnostic placement while remaining functional on both mobile and desktop resolutions.
+A menu toggle button MUST be integrated into the `Header.astro` component on the right-most section of the header. The component MUST be refactored to support flexible, position-agnostic placement while remaining functional on both mobile and desktop resolutions. The toggle button MUST display the text label "MENU".
 
 #### Scenario: Header Toggle Presence
 - **GIVEN** the user navigates to any page
