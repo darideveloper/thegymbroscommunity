@@ -1,6 +1,6 @@
 ---
 // src/components/utils/base/BaseSEO.astro
-import { BUSINESS_DATA, SITE_TITLE, SITE_DESCRIPTION } from '../../../lib/constants';
+import { BUSINESS_DATA, SITE_TITLE, SITE_DESCRIPTION, SITE_KEYWORDS } from '../../../lib/constants';
 
 interface ProductItem {
   name: string;
@@ -13,6 +13,8 @@ interface ProductItem {
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  author?: string;
   jsonType?: "OnlineStore" | "WebPage" | "BlogPosting";
   extraJson?: Record<string, any>;
   useTagLine?: boolean;
@@ -22,6 +24,8 @@ interface Props {
 const { 
   title, 
   description: propDescription, 
+  keywords: propKeywords,
+  author: propAuthor,
   jsonType = "WebPage", 
   extraJson = {},
   useTagLine = true,
@@ -40,6 +44,8 @@ const absoluteLogoUrl = new URL(BUSINESS_DATA.logo, BUSINESS_DATA.url).href;
 
 const resolvedTitle = title || SITE_TITLE;
 const resolvedDescription = propDescription || SITE_DESCRIPTION;
+const resolvedKeywords = propKeywords || SITE_KEYWORDS;
+const resolvedAuthor = propAuthor || BUSINESS_DATA.author || BUSINESS_DATA.name;
 
 let pageTitle = resolvedTitle;
 if (useTagLine && resolvedTitle !== BUSINESS_DATA.name) {
@@ -70,7 +76,6 @@ const organizationJson = {
   description: SITE_DESCRIPTION,
   email: BUSINESS_DATA.contact.email,
   telephone: BUSINESS_DATA.contact.telephone,
-  priceRange: BUSINESS_DATA.priceRange,
   sameAs: sameAs,
 };
 
@@ -138,6 +143,8 @@ const jsonLd = {
 ---
 <title>{pageTitle}</title>
 <meta name="description" content={resolvedDescription} />
+<meta name="keywords" content={resolvedKeywords} />
+<meta name="author" content={resolvedAuthor} />
 <link rel="canonical" href={canonicalUrl} />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#060010" />

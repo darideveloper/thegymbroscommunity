@@ -1,16 +1,6 @@
-# seo-engine Specification
+# Spec Delta: SEO Engine Sync
 
-## Purpose
-The SEO Engine provides a centralized, robust system for managing page metadata, social media sharing tags, and e-commerce structured data (JSON-LD). It ensures that all pages have a consistent SEO baseline while allowing for granular overrides at the page level.
-
-## Requirements
-### Requirement: Centralized SEO Metadata Resolution
-The system MUST resolve page titles and descriptions using a fallback hierarchy: Prop > Constant > Default.
-
-#### Scenario: Home Page SEO Resolution
-Given the `BaseSEO` component is used on the home page without specific props.
-When the component resolves metadata.
-Then it MUST use the `SITE_TITLE` and `SITE_DESCRIPTION` constants from `src/lib/constants.ts`.
+## MODIFIED Requirements
 
 ### Requirement: Digital-First Entity Declaration
 The system MUST use the `OnlineStore` Schema.org type for the primary organization entity to optimize for digital-first e-commerce indexing.
@@ -34,11 +24,3 @@ The system MUST automatically generate an `ItemList` containing `Product` object
 Given a list of 12 products is passed to `BaseSEO`.
 When the page is rendered.
 Then the JSON-LD MUST contain an `ItemList` with 12 `ListItem` elements, each containing a `Product` schema.
-
-### Requirement: Tagline Append Logic
-The system MUST append the business name to the page title if it is not already present and if `useTagLine` is true.
-
-#### Scenario: Service Page Tagline
-Given a title "Supplements" and `BUSINESS_DATA.name` "The Gym Bros Community".
-When `BaseSEO` resolves the title.
-Then the resulting title MUST be "Supplements | The Gym Bros Community".

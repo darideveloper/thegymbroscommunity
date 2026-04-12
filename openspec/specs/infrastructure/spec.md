@@ -1,7 +1,8 @@
 # infrastructure Specification
 
 ## Purpose
-TBD - created by archiving change implement-seo-architecture. Update Purpose after archive.
+The Infrastructure specification covers the automated generation and management of critical SEO assets, such as sitemaps and search engine instruction files (robots.txt), ensuring they are kept in sync with the project's content and routing structure.
+
 ## Requirements
 ### Requirement: Dynamic Sitemap Generation
 The project MUST automatically generate a `sitemap-index.xml` during every build.
@@ -18,4 +19,3 @@ The project MUST provide a dynamic `robots.txt` that correctly references the si
 Given the `src/pages/robots.txt.ts` route is implemented.
 When the user accesses `/robots.txt`.
 Then the response MUST include `Sitemap: https://thegymbroscommunity.com/sitemap-index.xml`.
-
