@@ -774,8 +774,22 @@ export default function LiquidEther({
         this.createShaderPass();
       }
       getFloatType() {
-        const isIOS = /(iPad|iPhone|iPod)/i.test(navigator.userAgent);
-        return isIOS ? THREE.HalfFloatType : THREE.FloatType;
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const renderer = Common.renderer;
+        const extensions = renderer.extensions;
+
+        if (isMobile) {
+          // HalfFloat is highly compatible and performance-efficient on mobile
+          return THREE.HalfFloatType;
+        }
+
+        // Desktop: Use FloatType if supported with linear filtering for max precision
+        // Otherwise fallback to HalfFloatType
+        if (extensions.get('OES_texture_float') && extensions.get('OES_texture_float_linear')) {
+          return THREE.FloatType;
+        }
+
+        return THREE.HalfFloatType;
       }
       createAllFBO() {
         const type = this.getFloatType();
