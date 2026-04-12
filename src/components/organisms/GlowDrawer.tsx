@@ -21,7 +21,7 @@ export function GlowDrawer({
 }: GlowDrawerProps) {
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  useGlowDrawerAnimation(isOpen, containerRef);
+  useGlowDrawerAnimation(isOpen, containerRef, isMounted);
   useScrollLock(isOpen);
 
   useEffect(() => {

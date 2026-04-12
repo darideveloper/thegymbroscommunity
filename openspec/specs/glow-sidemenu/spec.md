@@ -4,14 +4,13 @@
 TBD - created by archiving change implement-glow-sidemenu. Update Purpose after archive.
 ## Requirements
 ### Requirement: Black Fade Menu Panel
-The menu panel MUST have a black background and MUST appear with a smooth, optimized fade-in animation using GSAP. The menu MUST be renamed to "GlowDrawer" and rendered via a React Portal to the `document.body`. When the drawer is open, the body scroll MUST be locked. **The component MUST wait for initial client-side mount before rendering the Portal to ensure hydration stability.**
+The menu panel MUST have a black background and MUST appear with a smooth, optimized fade-in animation using GSAP. The menu MUST be renamed to "GlowDrawer" and rendered via a React Portal to the `document.body`. When the drawer is open, the body scroll MUST be locked. The component MUST wait for initial client-side mount before rendering the Portal to ensure hydration stability. **The GSAP animations MUST NOT be initialized until after the component has mounted and the target elements are confirmed to be present in the DOM.**
 
-#### Scenario: Hydration Stability
+#### Scenario: GSAP Initialization
 -   **Given**: `GlowDrawer` is included in an Astro page as a Client Component.
--   **When**: The page is initially loaded (SSR) and hydrated on the client.
--   **Then**: The component MUST NOT render any Portal content during the first client-side pass (it returns `null`).
--   **Then**: The component MUST ONLY render the Portal after the `useEffect` hook has triggered on the client (it returns `createPortal`).
--   **Then**: No "Hydration failed" or "mismatch" errors appear in the browser console.
+-   **When**: The component mounts and `isMounted` transitions from `false` to `true`.
+-   **Then**: The custom hook `useGlowDrawerAnimation` runs its initialization.
+-   **And**: GSAP correctly queries the newly rendered DOM elements and successfully builds the timeline, allowing the animation to play upon toggle.
 
 ### Requirement: Glowing Menu Items
 Menu text items SHALL feature a "glow" effect, achieved through CSS text-shadow, making them stand out against the black background.

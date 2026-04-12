@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-export const useGlowDrawerAnimation = (isOpen: boolean, containerRef: React.RefObject<HTMLElement | null>) => {
+export const useGlowDrawerAnimation = (isOpen: boolean, containerRef: React.RefObject<HTMLElement | null>, isMounted: boolean = true) => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    if (!isMounted || !containerRef.current) return;
+
     const ctx = gsap.context(() => {
       // Initialize hidden state
       gsap.set('.glow-sidemenu-panel', { xPercent: 100, autoAlpha: 0 });
@@ -43,7 +45,7 @@ export const useGlowDrawerAnimation = (isOpen: boolean, containerRef: React.RefO
     }, containerRef);
 
     return () => ctx.revert();
-  }, [containerRef]);
+  }, [containerRef, isMounted]);
 
   useEffect(() => {
     if (timelineRef.current) {

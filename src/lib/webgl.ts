@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import type { RefObject } from 'react';
 
 /**
  * Checks if the current environment supports WebGL.
