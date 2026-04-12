@@ -1,5 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
+import { cn } from '@/lib/utils';
 import './MagicBento.css';
 
 const DEFAULT_PARTICLE_COUNT = 12;
@@ -309,7 +310,7 @@ const ParticleCard = ({
   return (
     <div
       ref={cardRef}
-      className={`${className} particle-container`}
+      className={cn(className, "particle-container")}
       style={{ ...style, position: 'relative', overflow: 'hidden' }}
     >
       {children}
@@ -501,7 +502,11 @@ const MagicBento = ({
 
       <BentoCardGrid gridRef={gridRef}>
         {cardData.map((card, index) => {
-          const baseClassName = `magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`;
+          const baseClassName = cn(
+            "magic-bento-card",
+            textAutoHide && "magic-bento-card--text-autohide",
+            enableBorderGlow && "magic-bento-card--border-glow"
+          );
           const cardProps = {
             className: baseClassName,
             style: {

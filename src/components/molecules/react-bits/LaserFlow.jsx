@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { cn } from '@/lib/utils';
 import './LaserFlow.css';
 
 const VERT = `
@@ -578,7 +579,7 @@ export const LaserFlow = ({
     color
   ]);
 
-  return <div ref={mountRef} className={`laser-flow-container ${className || ''}`} style={style} />;
+  return <div ref={mountRef} className={cn("laser-flow-container", className)} style={style} />;
 };
 
 export default LaserFlow;

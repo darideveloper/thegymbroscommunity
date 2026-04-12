@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { cn } from '@/lib/utils';
 import './LiquidEther.css';
 
 export default function LiquidEther({
@@ -1164,5 +1165,5 @@ export default function LiquidEther({
     autoRampDuration
   ]);
 
-  return <div ref={mountRef} className={`liquid-ether-container ${className || ''}`} style={style} />;
+  return <div ref={mountRef} className={cn("liquid-ether-container", className)} style={style} />;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GlowDrawer from './GlowDrawer';
 import GlowDrawerToggle from '../molecules/GlowDrawerToggle';
+import { cn } from '@/lib/utils';
 import type { MenuItem, SocialItem } from '../../types/navigation';
 
 interface GlowNavigationDrawerProps {
@@ -18,7 +19,7 @@ export const GlowNavigationDrawer: React.FC<GlowNavigationDrawerProps> = ({
 
   return (
     <>
-      <div className={className}>
+      <div className={cn(className)}>
         <GlowDrawerToggle onClick={() => setIsOpen(true)} />
       </div>
       <GlowDrawer 

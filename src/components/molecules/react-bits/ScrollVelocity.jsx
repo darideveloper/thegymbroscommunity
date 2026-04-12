@@ -8,6 +8,7 @@ import {
   useVelocity,
   useAnimationFrame,
 } from 'motion/react'
+import { cn } from '@/lib/utils'
 import './ScrollVelocity.css'
 
 function useElementWidth(ref) {
@@ -104,7 +105,7 @@ export const ScrollVelocity = ({
     for (let i = 0; i < numCopies; i++) {
       spans.push(
         <span
-          className={className}
+          className={cn(className)}
           key={i}
           ref={i === 0 ? copyRef : null}
         >
@@ -115,11 +116,11 @@ export const ScrollVelocity = ({
 
     return (
       <div
-        className={parallaxClassName}
+        className={cn(parallaxClassName)}
         style={parallaxStyle}
       >
         <motion.div
-          className={scrollerClassName}
+          className={cn(scrollerClassName)}
           style={{ x, ...scrollerStyle }}
         >
           {spans}

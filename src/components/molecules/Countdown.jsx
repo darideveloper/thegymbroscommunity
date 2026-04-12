@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -46,7 +46,7 @@ const Countdown = ({ targetDate, className }) => {
     <div 
       role="timer" 
       aria-label={`Countdown to ${new Date(targetDate).toLocaleDateString()}`}
-      className={clsx('flex flex-wrap gap-4 md:gap-8 justify-center items-center select-none', className)}
+      className={cn('flex flex-wrap gap-4 md:gap-8 justify-center items-center select-none', className)}
     >
       <TimeUnit value={timeLeft.days} label="Days" />
       <TimeUnit value={timeLeft.hours} label="Hours" />

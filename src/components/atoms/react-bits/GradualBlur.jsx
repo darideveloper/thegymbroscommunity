@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import * as math from 'mathjs';
+import { cn } from '@/lib/utils';
 
 import './GradualBlur.css';
 
@@ -208,7 +209,11 @@ function GradualBlur(props) {
   return (
     <div
       ref={containerRef}
-      className={`gradual-blur ${config.target === 'page' ? 'gradual-blur-page' : 'gradual-blur-parent'} ${config.className}`}
+      className={cn(
+        "gradual-blur",
+        config.target === 'page' ? 'gradual-blur-page' : 'gradual-blur-parent',
+        config.className
+      )}
       style={containerStyle}
       onMouseEnter={hoverIntensity ? () => setIsHovered(true) : undefined}
       onMouseLeave={hoverIntensity ? () => setIsHovered(false) : undefined}

@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState, useMemo } from 'react'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 
 const buildKeyframes = (from, steps) => {
   const keys = new Set([
@@ -80,7 +80,7 @@ const BlurText = ({
   return (
     <p
       ref={ref}
-      className={clsx('flex flex-wrap', className)}
+      className={cn('flex flex-wrap', className)}
       style={{ display: 'flex', flexWrap: 'wrap' }}
     >
       {elements.map((segment, index) => {
