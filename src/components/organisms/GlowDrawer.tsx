@@ -12,13 +12,13 @@ interface GlowDrawerProps {
   title?: string;
 }
 
-export const GlowDrawer: React.FC<GlowDrawerProps> = ({
+export function GlowDrawer({
   isOpen,
   onClose,
   children,
   logoUrl = '/assets/logo.webp',
   title = "Side Navigation"
-}) => {
+}: GlowDrawerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useGlowDrawerAnimation(isOpen, containerRef);
   useScrollLock(isOpen);
@@ -71,6 +71,6 @@ export const GlowDrawer: React.FC<GlowDrawerProps> = ({
     </div>,
     document.body
   );
-};
+}
 
 export default GlowDrawer;

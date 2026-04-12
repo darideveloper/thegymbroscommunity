@@ -16,6 +16,7 @@ The Gym Bros Community is a modern, high-performance community platform built wi
 ### Code Style
 - Use `clsx` and `tailwind-merge` for class handling (as per `GEMINI.md`).
 - Prefer `Vanilla CSS` for global styles, `Tailwind` for component-level styling.
+- **React Components:** Define all React components using standard function declarations (`function Name() { ... }`) instead of `React.FC`.
 - Follow TypeScript best practices.
 
 ### Architecture Patterns

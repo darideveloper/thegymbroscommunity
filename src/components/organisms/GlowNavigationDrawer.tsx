@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GlowDrawer from './GlowDrawer';
 import GlowDrawerToggle from '../molecules/GlowDrawerToggle';
 import { cn } from '@/lib/utils';
@@ -10,11 +10,11 @@ interface GlowNavigationDrawerProps {
   className?: string;
 }
 
-export const GlowNavigationDrawer: React.FC<GlowNavigationDrawerProps> = ({
+export function GlowNavigationDrawer({
   items,
   socialItems = [],
   className = ""
-}) => {
+}: GlowNavigationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -67,6 +67,6 @@ export const GlowNavigationDrawer: React.FC<GlowNavigationDrawerProps> = ({
       </GlowDrawer>
     </>
   );
-};
+}
 
 export default GlowNavigationDrawer;

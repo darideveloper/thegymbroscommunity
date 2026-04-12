@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -9,12 +8,12 @@ interface GlowDrawerToggleProps {
   color?: string;
 }
 
-export const GlowDrawerToggle: React.FC<GlowDrawerToggleProps> = ({
+export function GlowDrawerToggle({
   onClick,
   className = '',
   label = "Menu",
   color = '#fff'
-}) => {
+}: GlowDrawerToggleProps) {
   return (
     <button
       onClick={onClick}
@@ -29,6 +28,6 @@ export const GlowDrawerToggle: React.FC<GlowDrawerToggleProps> = ({
       <Menu size={32} />
     </button>
   );
-};
+}
 
 export default GlowDrawerToggle;
