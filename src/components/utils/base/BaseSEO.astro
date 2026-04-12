@@ -1,0 +1,161 @@
+---
+// src/components/utils/base/BaseSEO.astro
+import { BUSINESS_DATA, SITE_TITLE, SITE_DESCRIPTION } from '../../../lib/constants';
+
+interface ProductItem {
+  name: string;
+  image: string;
+  url?: string;
+  price?: string;
+  availability?: string;
+}
+
+interface Props {
+  title?: string;
+  description?: string;
+  jsonType?: "OnlineStore" | "WebPage" | "BlogPosting";
+  extraJson?: Record<string, any>;
+  useTagLine?: boolean;
+  productList?: ProductItem[];
+}
+
+const { 
+  title, 
+  description: propDescription, 
+  jsonType = "WebPage", 
+  extraJson = {},
+  useTagLine = true,
+  productList = []
+} = Astro.props;
+
+// Canonical URL Normalization
+// Ensures consistency: always has a trailing slash, absolute URL
+const normalizeCanonical = (path: string) => {
+  const url = new URL(path, BUSINESS_DATA.url);
+  return url.href.endsWith('/') ? url.href : `${url.href}/`;
+};
+
+const canonicalUrl = normalizeCanonical(Astro.url.pathname);
+const absoluteLogoUrl = new URL(BUSINESS_DATA.logo, BUSINESS_DATA.url).href;
+
+const resolvedTitle = title || SITE_TITLE;
+const resolvedDescription = propDescription || SITE_DESCRIPTION;
+
+let pageTitle = resolvedTitle;
+if (useTagLine && resolvedTitle !== BUSINESS_DATA.name) {
+  if (!resolvedTitle.includes(BUSINESS_DATA.name)) {
+    pageTitle = `${resolvedTitle} | ${BUSINESS_DATA.name}`;
+  }
+}
+
+// Structured Data (@graph approach)
+const sameAs = [
+  BUSINESS_DATA.social.instagram,
+  BUSINESS_DATA.social.facebook,
+  BUSINESS_DATA.social.twitter
+].filter(Boolean);
+
+const organizationJson = {
+  "@type": "OnlineStore",
+  "@id": `${BUSINESS_DATA.url}#organization`,
+  name: BUSINESS_DATA.name,
+  url: BUSINESS_DATA.url,
+  logo: {
+    "@type": "ImageObject",
+    "url": absoluteLogoUrl,
+    "width": "600",
+    "height": "600"
+  },
+  image: absoluteLogoUrl,
+  description: SITE_DESCRIPTION,
+  email: BUSINESS_DATA.contact.email,
+  telephone: BUSINESS_DATA.contact.telephone,
+  priceRange: BUSINESS_DATA.priceRange,
+  sameAs: sameAs,
+};
+
+const websiteJson = {
+  "@type": "WebSite",
+  "@id": `${BUSINESS_DATA.url}#website`,
+  url: BUSINESS_DATA.url,
+  name: BUSINESS_DATA.name,
+  publisher: { "@id": `${BUSINESS_DATA.url}#organization` },
+  potentialAction: {
+    "@type": "SearchAction",
+    "target": new URL('search?q={search_term_string}', BUSINESS_DATA.url).href,
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const webpageJson = {
+  "@type": "WebPage",
+  "@id": `${canonicalUrl}#webpage`,
+  url: canonicalUrl,
+  name: pageTitle,
+  description: resolvedDescription,
+  isPartOf: { "@id": `${BUSINESS_DATA.url}#website` },
+  about: { "@id": `${BUSINESS_DATA.url}#organization` },
+  inLanguage: "es",
+};
+
+// If it's an OnlineStore type and we have products, add ItemList
+if (jsonType === "OnlineStore" && productList.length > 0) {
+  (webpageJson as any).mainEntity = {
+    "@type": "ItemList",
+    "name": "Featured Collection",
+    "numberOfItems": productList.length,
+    "itemListElement": productList.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "name": product.name,
+        "image": new URL(product.image, BUSINESS_DATA.url).href,
+        "url": product.url ? new URL(product.url, BUSINESS_DATA.url).href : canonicalUrl,
+        "brand": { "@type": "Brand", "name": BUSINESS_DATA.name },
+        "offers": {
+          "@type": "Offer",
+          "price": product.price || "0.00",
+          "priceCurrency": "EUR",
+          "availability": product.availability || "https://schema.org/PreOrder"
+        }
+      }
+    }))
+  };
+}
+
+const graph = [
+  organizationJson,
+  websiteJson,
+  webpageJson,
+  ... (jsonType === "BlogPosting" ? [{ ...extraJson, "@type": "BlogPosting" }] : [])
+];
+
+const jsonLd = { 
+  "@context": "https://schema.org",
+  "@graph": graph 
+};
+---
+<title>{pageTitle}</title>
+<meta name="description" content={resolvedDescription} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#060010" />
+
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={resolvedDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content="website" />
+<meta property="og:image" content={absoluteLogoUrl} />
+<meta property="og:site_name" content={BUSINESS_DATA.name} />
+<meta property="og:image:alt" content={pageTitle} />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={resolvedDescription} />
+<meta name="twitter:image" content={absoluteLogoUrl} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

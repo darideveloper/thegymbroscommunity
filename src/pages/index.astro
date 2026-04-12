@@ -5,12 +5,24 @@ import ProductShowcase from '../components/organisms/ProductShowcase.astro'
 import About from '../components/organisms/About.astro'
 import { getProducts } from '../lib/api/products.ts'
 import LiquidEther from '../components/organisms/react-bits/LiquidEther.jsx'
+import BaseSEO from '../components/utils/base/BaseSEO.astro'
 
 const products = await getProducts()
 const countdownTarget = import.meta.env.PUBLIC_COUNTDOWN_TARGET_DATE
+
+const productList = products.map(p => ({
+  name: p.text,
+  image: p.image
+}));
 ---
 
 <Layout>
+  <BaseSEO 
+    slot="seo"
+    jsonType="OnlineStore"
+    productList={productList}
+  />
+
   <Hero targetDate={countdownTarget} />
 
   <ProductShowcase products={products} />

@@ -5,7 +5,7 @@ import Header from '../components/organisms/Header.astro'
 
 <!doctype html>
 <html
-  lang='en'
+  lang='es'
   data-theme='halloween'
 >
   <head>
@@ -27,7 +27,9 @@ import Header from '../components/organisms/Header.astro'
       name='generator'
       content={Astro.generator}
     />
-    <title>The Gym Bros Community | Ropa Fitness de Élite</title>
+    
+    <!-- SEO Injection Point -->
+    <slot name='seo' />
   </head>
   <body class='relative min-h-screen bg-transparent'>
     <!-- Base background layer -->
