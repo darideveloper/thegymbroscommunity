@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { useGlowDrawerAnimation } from '../../hooks/useGlowDrawerAnimation';
@@ -19,11 +19,14 @@ export function GlowDrawer({
   logoUrl = '/assets/logo.webp',
   title = "CENTRO DE MANDO"
 }: GlowDrawerProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   useGlowDrawerAnimation(isOpen, containerRef);
   useScrollLock(isOpen);
 
   useEffect(() => {
+    setIsMounted(true);
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -34,7 +37,7 @@ export function GlowDrawer({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (typeof document === 'undefined') return null;
+  if (!isMounted) return null;
 
   return createPortal(
     <div ref={containerRef} className="relative z-100">
