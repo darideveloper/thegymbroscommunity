@@ -6,12 +6,12 @@ const { targetDate } = Astro.props
 ---
 
 <section class='relative w-full overflow-hidden'>
-  <div class='flex flex-col items-center w-full py-12 gap-8 md:debug'>
+  <div class='flex flex-col items-center w-full py-12 gap-8'>
     <slot />
 
     <Countdown
       targetDate={targetDate}
-      className='mt-8 md:mt-22 -ml-32 md:-ml-64 w-md -mb-96 p-20 md:p-4'
+      className='w-full mt-12 md:mt-24 mb-12 md:mb-20 px-4'
       client:only='react'
     />
   </div>

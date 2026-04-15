@@ -32,7 +32,6 @@ const Countdown = ({ targetDate, className }) => {
       };
     };
 
-    // Initial calculation
     setTimeLeft(calculateTimeLeft());
 
     const interval = setInterval(() => {
@@ -46,19 +45,29 @@ const Countdown = ({ targetDate, className }) => {
     <div 
       role="timer" 
       aria-label={`PRÓXIMO LANZAMIENTO: ${new Date(targetDate).toLocaleDateString()}`}
-      className={cn('flex flex-wrap gap-4 md:gap-8 justify-center items-center select-none', className)}
+      className={cn(
+        'relative select-none flex flex-col items-center gap-4 md:gap-6',
+        className
+      )}
     >
-      <TimeUnit value={timeLeft.days} label="DÍAS" />
-      <TimeUnit value={timeLeft.hours} label="HORAS" />
-      <TimeUnit value={timeLeft.minutes} label="MINS" />
-      <TimeUnit value={timeLeft.seconds} label="SEGS" />
+      <div className="flex items-center justify-center bg-black/80 backdrop-blur-3xl p-5 md:p-10 lg:p-14 rounded-[1.75rem] md:rounded-[2.8rem] border border-white/10 shadow-3xl shadow-black/50">
+        <div className="flex items-center gap-1 md:gap-4 lg:gap-6">
+          <TimeUnit value={timeLeft.days} label="DÍAS" />
+          <Separator />
+          <TimeUnit value={timeLeft.hours} label="HORAS" />
+          <Separator />
+          <TimeUnit value={timeLeft.minutes} label="MINS" />
+          <Separator />
+          <TimeUnit value={timeLeft.seconds} label="SEGS" />
+        </div>
+      </div>
     </div>
   );
 };
 
 const TimeUnit = ({ value, label }) => (
-  <div className="flex flex-col items-center">
-    <div className="relative h-20 w-24 md:h-28 md:w-32 overflow-hidden flex justify-center items-center bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 shadow-2xl">
+  <div className="flex flex-col items-center min-w-[50px] md:min-w-[84px] lg:min-w-[112px]">
+    <div className="relative overflow-hidden flex justify-center items-center">
       <AnimatePresence mode="popLayout">
         <motion.span
           key={value}
@@ -67,18 +76,24 @@ const TimeUnit = ({ value, label }) => (
           exit={{ y: -20, opacity: 0, filter: 'blur(5px)' }}
           transition={{ 
             duration: 0.4, 
-            ease: [0.23, 1, 0.32, 1] // Custom cubic-bezier for a "premium" feel
+            ease: [0.23, 1, 0.32, 1]
           }}
-          className="text-4xl md:text-6xl font-bold text-primary tabular-nums"
+          className="text-3xl md:text-5xl lg:text-7xl font-bold font-clock text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         >
           {String(value).padStart(2, '0')}
         </motion.span>
       </AnimatePresence>
-      
-      {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-white/5 to-transparent rounded-2xl" />
     </div>
-    <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] mt-4 text-white/50 font-medium">{label}</span>
+    <span className="text-[8px] md:text-[10px] lg:text-xs uppercase tracking-[0.3em] mt-2 md:mt-4 text-white/40 font-medium">
+      {label}
+    </span>
+  </div>
+);
+
+const Separator = () => (
+  <div className="flex flex-col gap-1.5 md:gap-3 mb-2 md:mb-4 opacity-30">
+    <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white" />
+    <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white" />
   </div>
 );
 
