@@ -17,12 +17,12 @@ const { targetDate } = Astro.props
   </div>
 
   <div
-    class='w-auto md:w-screen h-[500px] md:h-[700px] relative -mt-32 md:-mt-60 -mr-16 md:mr-0'
+    class='w-auto md:w-screen h-[80vh] md:h-screen -mt-[80vh] relative'
   >
     <LaserFlow
       color='#ca3500'
       flowSpeed={0.84}
-      verticalSizing={5}
+      verticalSizing={24}
       horizontalSizing={1.6}
       fogIntensity={0.55}
       fogScale={0.6}
@@ -30,10 +30,11 @@ const { targetDate } = Astro.props
       wispIntensity={5}
       flowStrength={0.13}
       decay={1.1}
-      horizontalBeamOffset={0.15}
+      horizontalBeamOffset={0}
       verticalBeamOffset={-0.5}
       transparent={true}
       client:only='react'
+      className='-z-10'
     />
   </div>
 </section>
