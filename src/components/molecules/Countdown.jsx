@@ -50,7 +50,7 @@ const Countdown = ({ targetDate, className }) => {
         className
       )}
     >
-      <div className="flex items-center justify-center bg-black/80 backdrop-blur-3xl p-5 md:p-10 lg:p-14 rounded-[1.75rem] md:rounded-[2.8rem] border border-white/10 shadow-3xl shadow-black/50">
+      <div className="flex items-center justify-center bg-transparent backdrop-blur-3xl p-5 md:p-10 lg:p-14 rounded-[1.75rem] md:rounded-[2.8rem] border border-white/10 shadow-3xl shadow-black/50">
         <div className="flex items-center gap-1 md:gap-4 lg:gap-6">
           <TimeUnit value={timeLeft.days} label="DÍAS" />
           <Separator />
