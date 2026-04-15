@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
+import BlurText from '../atoms/react-bits/BlurText.jsx';
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -50,7 +51,7 @@ const Countdown = ({ targetDate, className }) => {
         className
       )}
     >
-      <div className="flex items-center justify-center bg-transparent backdrop-blur-3xl p-5 md:p-10 lg:p-14 rounded-[1.75rem] md:rounded-[2.8rem] border border-white/10 shadow-3xl shadow-black/50">
+      <div className="flex flex-col items-center justify-center bg-transparent backdrop-blur-3xl p-5 md:p-10 lg:p-14 rounded-[1.75rem] md:rounded-[2.8rem] border border-white/10 shadow-3xl shadow-black/50 gap-8 md:gap-12">
         <div className="flex items-center gap-1 md:gap-4 lg:gap-6">
           <TimeUnit value={timeLeft.days} label="DÍAS" />
           <Separator />
@@ -60,6 +61,15 @@ const Countdown = ({ targetDate, className }) => {
           <Separator />
           <TimeUnit value={timeLeft.seconds} label="SEGS" />
         </div>
+
+        <h1 className="font-heading font-black text-2xl md:text-5xl lg:text-6xl text-white tracking-tighter">
+          <BlurText
+            text="The Gym Bros Community"
+            delay={150}
+            animateBy="words"
+            className="text-white font-heading font-black tracking-tighter"
+          />
+        </h1>
       </div>
     </div>
   );
