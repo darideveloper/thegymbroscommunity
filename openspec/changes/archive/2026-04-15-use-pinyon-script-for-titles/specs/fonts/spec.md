@@ -1,22 +1,9 @@
 # fonts Specification
 
 ## Purpose
-TBD - created by archiving change add-google-fonts. Update Purpose after archive.
-## Requirements
-### Requirement: Install Fontsource packages
-**Description:** The application SHALL install the required Pinyon Script and Lato fonts via Fontsource.
-#### Scenario:
-The user runs `npm install @fontsource/pinyon-script @fontsource/lato` to add the required fonts to `package.json`.
+Apply the branded "Pinyon Script" font consistently across all headings and titles.
 
-### Requirement: Apply Pinyon Script to Title
-**Description:** The application SHALL apply Pinyon Script to the main title.
-#### Scenario:
-Convert the "The Gym Bros Community" text in `src/pages/index.astro` to an `<h1>` tag. Apply the Pinyon Script font to this `<h1>` element via global CSS.
-
-### Requirement: Global font configuration
-**Description:** The application SHALL set Lato as the default sans-serif font and Pinyon Script as the heading font.
-#### Scenario:
-Import the fonts in `src/styles/global.css` and configure CSS variables to use Pinyon Script for headings (h1, h2, h3) and Lato for the body.
+## ADDED Requirements
 
 ### Requirement: Global Heading Style
 **Description:** The application SHALL apply `Pinyon Script` to all standard heading tags (`h1` through `h6`) by default.
@@ -37,4 +24,3 @@ Update `src/components/molecules/react-bits/ScrollVelocity.css` to set the `.scr
 **Description:** The titles in the Bento section SHALL use `Pinyon Script` and be 32px in size.
 #### Scenario:
 Update `src/components/organisms/react-bits/MagicBento.css` to set the `.magic-bento-card__title` font-family to `var(--font-heading)` and font-size to 32px.
-

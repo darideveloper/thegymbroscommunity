@@ -11,37 +11,37 @@ const MOBILE_BREAKPOINT = 768;
 const cardData = [
   {
     color: '#060010',
-    title: 'ARMADURA DE ÉLITE',
+    title: 'Armadura de Élite',
     description: 'Diseñada para el guerrero moderno del gimnasio.',
     label: 'FUERZA'
   },
   {
     color: '#060010',
-    title: 'PODER EN MOVIMIENTO',
+    title: 'Poder en Movimiento',
     description: 'Telas que se adaptan a cada una de tus repeticiones.',
     label: 'AGILIDAD'
   },
   {
     color: '#060010',
-    title: 'ESPÍRITU DE LUCHA',
+    title: 'Espíritu de Lucha',
     description: 'Ropa que grita determinación en cada serie.',
     label: 'PASIÓN'
   },
   {
     color: '#060010',
-    title: 'INGENIERÍA FITNESS',
+    title: 'Ingeniería Fitness',
     description: 'Máxima transpirabilidad para entrenamientos explosivos.',
     label: 'POTENCIA'
   },
   {
     color: '#060010',
-    title: 'ESTILO DOMINANTE',
+    title: 'Estilo Dominante',
     description: 'Domina el rack con diseños que imponen respeto.',
     label: 'ACTITUD'
   },
   {
     color: '#060010',
-    title: 'EQUIPO SIN LÍMITES',
+    title: 'Equipo sin Límites',
     description: 'Resistencia extrema para quienes no conocen el descanso.',
     label: 'RESISTENCIA'
   }
