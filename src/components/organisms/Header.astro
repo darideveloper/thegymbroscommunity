@@ -1,6 +1,7 @@
 ---
 import TGCLogo from '../atoms/TGCLogo.astro';
 import GlowNavigationDrawer from './GlowNavigationDrawer';
+import { BUSINESS_DATA } from '../../lib/constants';
 
 const menuItems = [
   { label: 'Inicio', link: '/' },
@@ -9,9 +10,7 @@ const menuItems = [
 ];
 
 const socialItems = [
-  { label: 'EL GRAM', link: 'https://instagram.com' },
-  { label: 'EL FEED', link: 'https://twitter.com' },
-  { label: 'ESTACIÓN DE MANDO', link: 'https://discord.com' },
+  { label: 'INSTAGRAM', link: BUSINESS_DATA.social.instagram },
 ];
 ---
 

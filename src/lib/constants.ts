@@ -12,8 +12,6 @@ export const BUSINESS_DATA = {
     telephone: "+34600000000",
   },
   social: {
-    instagram: "https://instagram.com/thegymbroscommunity",
-    facebook: "https://facebook.com/thegymbroscommunity",
-    twitter: "https://twitter.com/thegymbros",
+    instagram: "https://www.instagram.com/the_gymbros_community/",
   },
 };
