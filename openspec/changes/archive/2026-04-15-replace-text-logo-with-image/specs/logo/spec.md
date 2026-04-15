@@ -1,15 +1,6 @@
-# logo Specification
+# logo Specification Delta
 
-## Purpose
-TBD - created by archiving change add-logo-top-left. Update Purpose after archive.
-## Requirements
-### Requirement: Top-left logo placement
-The logo from `src/assets/logo.webp` MUST be displayed in the left-most grid cell of the sticky global header (`Header.astro`) and MUST NOT be fixed separately in the layout body. The text-based fallback or companion text (if any) SHALL display "TGC".
-
-#### Scenario: Logo presence in header
-- **GIVEN** the user navigates to any page
-- **WHEN** the sticky header renders
-- **THEN** the logo MUST be visible in the left-most section of the header and the brand text MUST be "TGC".
+## ADDED Requirements
 
 ### Requirement: Image-based Logo
 The brand logo MUST be displayed using the image file located at `/assets/logo.webp` (source `public/assets/logo.webp`). The text-based "TGC" identifier SHALL only be used as a fallback (alt text) or in contexts where an image is not technically feasible.
@@ -23,4 +14,3 @@ The brand logo MUST be displayed using the image file located at `/assets/logo.w
 #### Scenario: Responsive Sizing
 - **GIVEN** different screen sizes
 - **THEN** the logo MUST adjust its height proportionally to maintain clarity and fit within the header layout (e.g., larger on desktop, smaller on mobile).
-
