@@ -63,9 +63,9 @@
 .magic-bento-card__label {
   font-size: 14px;
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
 }
 
 .magic-bento-card__title,

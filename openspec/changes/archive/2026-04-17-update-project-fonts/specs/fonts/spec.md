@@ -1,17 +1,11 @@
-# fonts Specification
+# fonts Specification Delta
 
-## Purpose
-TBD - created by archiving change add-google-fonts. Update Purpose after archive.
-## Requirements
-### Requirement: Install Fontsource packages
-**Description:** The application SHALL install the required Pinyon Script and Lato fonts via Fontsource.
-#### Scenario:
-The user runs `npm install @fontsource/pinyon-script @fontsource/lato` to add the required fonts to `package.json`.
+## MODIFIED Requirements
 
 ### Requirement: Global font configuration
-**Description:** The application SHALL use Libre Baskerville and Noto Serif consistently across all rendering methods, including WebGL canvas textures.
+**Description:** The application SHALL set Noto Serif as the default font and Libre Baskerville as the heading font.
 #### Scenario:
-Update `CircularGallery.jsx` to use `"Libre Baskerville"` as the default font for product titles rendered on the 3D plane.
+Import the fonts in `src/styles/global.css` and configure CSS variables to use Libre Baskerville for headings (h1, h2, h3, h4, h5, h6) and Noto Serif for the body.
 
 ### Requirement: Global Heading Style
 **Description:** The application SHALL apply `Libre Baskerville` to all standard heading tags (`h1` through `h6`) by default.
@@ -33,8 +27,9 @@ Update `src/components/molecules/react-bits/ScrollVelocity.css` or the scroller 
 #### Scenario:
 Update `src/components/organisms/react-bits/MagicBento.css` to ensure the `.magic-bento-card__title` uses `var(--font-heading)`.
 
-### Requirement: Label legibility
-**Description:** Small UI labels SHALL be optimized for legibility when using the Noto Serif font family.
-#### Scenario:
-Adjust `font-weight` or `letter-spacing` in `Countdown.jsx` and `MagicBento.css` if necessary to maintain clarity for uppercase labels.
+## REMOVED Requirements
 
+### Requirement: Apply Pinyon Script to Title
+**Description:** The application SHALL apply Pinyon Script to the main title.
+#### Scenario:
+(Removed as Pinyon Script is being replaced by Libre Baskerville via the global heading style).

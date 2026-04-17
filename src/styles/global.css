@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource/pinyon-script';
-@import '@fontsource/lato';
+@import '@fontsource/libre-baskerville';
+@import '@fontsource/noto-serif';
 @import '@fontsource/orbitron/700.css';
 
 @custom-variant dark (&:is(.dark *));
@@ -83,8 +83,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Lato', sans-serif;
-  --font-heading: 'Pinyon Script', cursive;
+  --font-sans: 'Noto Serif', serif;
+  --font-heading: 'Libre Baskerville', serif;
   --font-clock: 'Orbitron', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

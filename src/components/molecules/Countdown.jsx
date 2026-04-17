@@ -94,7 +94,7 @@ const TimeUnit = ({ value, label }) => (
         </motion.span>
       </AnimatePresence>
     </div>
-    <span className="text-[8px] md:text-[10px] lg:text-xs uppercase tracking-[0.3em] mt-2 md:mt-4 text-white/40 font-medium">
+    <span className="text-[8px] md:text-[10px] lg:text-xs uppercase tracking-[0.4em] mt-2 md:mt-4 text-white/40 font-bold">
       {label}
     </span>
   </div>
