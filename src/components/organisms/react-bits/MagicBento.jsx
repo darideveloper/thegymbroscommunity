@@ -11,15 +11,15 @@ const MOBILE_BREAKPOINT = 768;
 const cardData = [
   {
     color: '#060010',
-    title: 'Armadura de Élite',
-    description: 'Diseñada para el guerrero moderno del gimnasio.',
+    title: 'Forjada para Ganar',
+    description: 'Ropa deportiva de alto rendimiento diseñada para quienes no aceptan el segundo lugar. Cada costura, una declaración de poder.',
     label: 'FUERZA'
   },
   {
     color: '#060010',
-    title: 'Poder en Movimiento',
-    description: 'Telas que se adaptan a cada una de tus repeticiones.',
-    label: 'AGILIDAD'
+    title: 'El Sudor Es Tu Firma',
+    description: 'Viste lo que refleja lo que eres: alguien que da el cien por cien, cada sesión, sin excusas.',
+    label: 'MENTALIDAD'
   },
   {
     color: '#060010',
@@ -29,20 +29,20 @@ const cardData = [
   },
   {
     color: '#060010',
-    title: 'Ingeniería Fitness',
-    description: 'Máxima transpirabilidad para entrenamientos explosivos.',
+    title: 'Ingeniería que Rompe Récords',
+    description: 'Transpirabilidad extrema, cortes ergonómicos y materiales de élite para que tu rendimiento no tenga techo. Creada por atletas, para atletas.',
     label: 'POTENCIA'
   },
   {
     color: '#060010',
-    title: 'Estilo Dominante',
-    description: 'Domina el rack con diseños que imponen respeto.',
+    title: 'Domina Cada Espacio',
+    description: 'Diseños que imponen respeto desde que entras. Porque la actitud se viste, no se finge.',
     label: 'ACTITUD'
   },
   {
     color: '#060010',
-    title: 'Equipo sin Límites',
-    description: 'Resistencia extrema para quienes no conocen el descanso.',
+    title: 'Sin Descanso. Sin Concesiones.',
+    description: 'Materiales que aguantan tanto como tú. Ropa deportiva premium construida para los que van más allá de sus límites.',
     label: 'RESISTENCIA'
   }
 ];

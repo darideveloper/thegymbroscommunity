@@ -70,14 +70,15 @@
 
 .magic-bento-card__title,
 .magic-bento-card__description {
-  --clamp-title: 1;
+  --clamp-title: 2;
   --clamp-desc: 2;
 }
 
 .magic-bento-card__title {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 32px;
+  font-size: clamp(13px, 1.6vw, 18px);
+  line-height: 1.1;
   margin: 0 0 0.25em;
 }
 
