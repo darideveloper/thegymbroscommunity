@@ -1,8 +1,7 @@
-# magic-bento-layout Specification
+# magic-bento-layout Spec Delta
 
-## Purpose
-TBD - created by archiving change fix-magic-bento-title-clamping. Update Purpose after archive.
-## Requirements
+## MODIFIED Requirements
+
 ### Requirement: Title Visibility
 The `MagicBento` component titles **SHALL** be fully visible without truncation or line limits.
 
@@ -11,6 +10,8 @@ The `MagicBento` component titles **SHALL** be fully visible without truncation 
 - **When** the card is rendered
 - **Then** the title should wrap naturally and remain fully visible
 - **And** no line limit or ellipsis should be present.
+
+## ADDED Requirements
 
 ### Requirement: Description Visibility
 The `MagicBento` component descriptions **SHALL** be fully visible without truncation or line limits on all screen sizes.
@@ -28,4 +29,3 @@ The `MagicBento` cards **SHALL** maintain a minimum height of `200px` regardless
 - **Given** a `MagicBento` card has very short content (e.g., only a label and one-word title)
 - **When** the card is rendered
 - **Then** the card height should be at least `200px`.
-

@@ -472,7 +472,6 @@ const useMobileDetection = () => {
 };
 
 const MagicBento = ({
-  textAutoHide = true,
   enableStars = true,
   enableSpotlight = true,
   enableBorderGlow = true,
@@ -504,7 +503,6 @@ const MagicBento = ({
         {cardData.map((card, index) => {
           const baseClassName = cn(
             "magic-bento-card",
-            textAutoHide && "magic-bento-card--text-autohide",
             enableBorderGlow && "magic-bento-card--border-glow"
           );
           const cardProps = {
