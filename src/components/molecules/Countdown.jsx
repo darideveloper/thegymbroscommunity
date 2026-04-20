@@ -62,12 +62,13 @@ const Countdown = ({ targetDate, className }) => {
           <TimeUnit value={timeLeft.seconds} label="SEGS" />
         </div>
 
-        <h1 className="font-heading font-black text-2xl md:text-5xl lg:text-6xl text-white tracking-tighter">
+        <h1 className="font-heading font-black text-2xl md:text-5xl lg:text-6xl text-white tracking-tighter text-center">
           <BlurText
             text="The Gym Bros Community"
             delay={150}
             animateBy="words"
-            className="text-white font-heading font-black tracking-tighter"
+            className="text-white font-heading font-black tracking-tighter justify-center"
+            as="span"
           />
         </h1>
       </div>

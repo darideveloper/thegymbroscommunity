@@ -28,6 +28,7 @@ const BlurText = ({
   easing = (t) => t,
   onAnimationComplete,
   stepDuration = 0.35,
+  as: Component = 'div',
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('')
   const [inView, setInView] = useState(true)
@@ -74,11 +75,11 @@ const BlurText = ({
   const stepCount = toSnapshots.length + 1
   const totalDuration = stepDuration * (stepCount - 1)
   const times = Array.from({ length: stepCount }, (_, i) =>
-    stepCount === 1 ? 0 : i / (stepCount - 1),
+    stepCount === i ? 0 : i / (stepCount - 1),
   )
 
   return (
-    <p
+    <Component
       ref={ref}
       className={cn('flex flex-wrap', className)}
       style={{ display: 'flex', flexWrap: 'wrap' }}
@@ -109,7 +110,7 @@ const BlurText = ({
           </motion.span>
         )
       })}
-    </p>
+    </Component>
   )
 }
 
